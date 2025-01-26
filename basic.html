@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gacha Simulator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .gacha-container {
+            text-align: center;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            width: 300px;
+        }
+
+        .gacha-container h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .result {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-top: 20px;
+            padding: 10px;
+            background: #f0f0f0;
+            border-radius: 5px;
+        }
+
+        .roll-button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .roll-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="gacha-container">
+        <h1>Gacha Simulator</h1>
+        <button class="roll-button" onclick="rollGacha()">Roll Gacha</button>
+        <div class="result" id="result">Your result will appear here.</div>
+    </div>
+
+    <script>
+        // Define pool and drop rates
+        const pool = [
+            { name: "★★★★★★ Item", rate: 3 },
+            { name: "★★★★★ Item", rate: 15 },
+            { name: "★★★★ Item", rate: 35 },
+            { name: "★★★ Item", rate: 47}
+        ];
+
+        function rollGacha() {
+            // Generate a random number between 1 and 100
+            const randomNumber = Math.floor(Math.random() * 100) + 1;
+            let cumulativeRate = 0;
+
+            // Determine the result based on drop rates
+            for (let item of pool) {
+                cumulativeRate += item.rate;
+                if (randomNumber <= cumulativeRate) {
+                    document.getElementById("result").textContent = `You got: ${item.name}`;
+                    return;
+                }
+            }
+        }
+    </script>
+</body>
+</html>
