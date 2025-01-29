@@ -13,43 +13,69 @@
 	
 </head>
 <body>
-	<canvas id="starry-night"></canvas>
-	<div class="hero">
-		<div class="content">
-				<h4>Welcome to the Shining Utopia</h4>
-				<h1>Eternal Celestia</h1>
-				<h3>Let <span>your</span> journey begin.</h3>
-				<div class="card-horizontal">
- 
-    <div class="card-background"></div>
-    <div class="card-content">
-        <h5>The First Chapter</h5>
-        <div class="pra">
-            <p>Origin of the 17 Keys</p>
-            <button class="button">Prologue - 17 Keys of the World, Birth of the Klyviora's</button>
+
+        <button class="audio-btn" id="audioControl">
+            <i class="fas fa-volume-up"></i>
+        </button>
+    <audio id="bgMusic" loop>
+        <source src="bgm.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+	<div class="canvas-container">
+        <canvas id="hero-starry-night" class="starry-night-canvas"></canvas>
+        <div class="hero">
+            <div class="content">
+                <h4>Welcome to the Shining Utopia</h4>
+                <h1>Eternal Celestia</h1>
+                <h3>Let <span>your</span> journey begin.</h3>
+                <div class="card-horizontal">
+                    <div class="card-background"></div>
+                    <div class="card-content">
+                        <h5>The First Chapter</h5>
+                        <div class="pra">
+                            <p><span>Origin of the 17 Keys</span></p>
+                            <button class="button">Prologue - 17 Keys of the World, Birth of the Klyviora's</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
 				</div>
 			</div>
 
-<section class="about">
-	<div class="main">
-		<img src="main.jpg">
-		<div class="about-text">
-			<h2>About Eternal Celestia</h2>
-			<h5>"You need to learn more about other nation by coming to them, the <span>real world</span> is wide, you know?"</h5>
-			<p>Eternal Celestia tells the story of Richi Artemovia Hikaru, a divine being descended from the highest realm of gods and goddesses to guide humanity and other races on the planet La Terra. As the 17th Key among the Klyviora, Richi is known as the Soul Judgementor, the Savior Key. He is sent to Arcarum, a serene and beautiful land, where he becomes part of the royal family and mentors the crown prince, Kiryuu Kazeyama Fabio.
+			<div class="chapter">
+				<button class="button">Main Story</button>
+				<button class="button">Side Story</button>
+				<button class="button">Character Story</button>
+			</div>
 
-			Throughout his years of guidance, the Creator reveals a prophecy to the 17 Klyviora, warning them of a great danger—other creations of the divine—that threaten to destroy the world one by one. As Richi leads Kaze to unite nations and uncover their histories, one question lingers: What is Richi’s true purpose? Only he knows.</p>
-			<button type="button">Move to Chapter 1</button>
-		</div>
-	</div>
-</section>
+<div class="canvas-container">
+        <canvas id="about-starry-night" class="starry-night-canvas"></canvas>
+        <section class="about">
+            <div class="main">
+                <img src="main.jpg">
+                <div class="about-text">
+                    <h2>About Eternal Celestia</h2>
+                    <h5>"You need to learn more about other nation by coming to them, the <span>real world</span> is wide, you know?"</h5>
+                    <p>Eternal Celestia tells the story of Richi Artemovia Hikaru, a divine being descended from the highest realm of gods and goddesses to guide humanity and other races on the planet La Terra. As the 17th Key among the Klyviora, Richi is known as the Soul Judgementor, the Savior Key. He is sent to Arcarum, a serene and beautiful land, where he becomes part of the royal family and mentors the crown prince, Kiryuu Kazeyama Fabio.
 
+                    Throughout his years of guidance, the Creator reveals a prophecy to the 17 Klyviora, warning them of a great danger—other creations of the divine—that threaten to destroy the world one by one. As Richi leads Kaze to unite nations and uncover their histories, one question lingers: What is Richi's true purpose? Only he knows.</p>
+                    <button type="button">Move to Chapter 1</button>
+                </div>
+            </div>
+        </section>
+
+<div class="chapter">
+	<button class="button">Character List</button>
+	<button class="button">???</button>
+</div>
+
+ <div class="canvas-container">
+        <canvas id="prologues-starry-night" class="starry-night-canvas"></canvas>
 <div class="service">
 	<div class="title">
-		<h2>Prologues</h2>
+		<h1>Prologues</h1>
 	</div>
 
 		<div class="carousel-container">
@@ -71,7 +97,7 @@
 			<img src="region/Abyssal Tyrant.jpg">
 			<h5>Abyssal Tyrant</h5>
 			<div class="pra">
-				<p>UNKNOWN DATA</p>
+				<p>Creature of the abyss, living in the pit of the darkness. Shown up only when there's a misfortune or a great earthquake.</p>
 
 				<p style="text-align: center;">
 					<a class="button" href="#">Abyssal Tyrant Prologue</a>
@@ -83,7 +109,7 @@
 			<img src="region/Alteriel.jpg">
 			<h5>Alteriel</h5>
 			<div class="pra">
-				<p>UNKNOWN DATA</p>
+				<p>City of the blessed anchestors, they are good at using Wind Magic. People who praise and worship Gale Armamandis, the God of Wind. Sanctuary of the Fall.</p>
 
 				<p style="text-align: center;">
 					<a class="button" href="#">Alteriel Prologue</a>
@@ -107,7 +133,7 @@
 			<img src="region/Arcturus.jpg">
 			<h5>Arcturus</h5>
 			<div class="pra">
-				<p>UNKNOWN DATA</p>
+				<p>Warrior of the merpeople. They live under the water, with the blessing of Sylvannia Dyviana. They are mermaids who can turn into human whenthey arrived in lands. They're friends with humans.</p>
 
 				<p style="text-align: center;">
 					<a class="button" href="#">Arcturus Prologue</a>
@@ -119,7 +145,7 @@
 			<img src="region/Bariten.jpg">
 			<h5>Bariten</h5>
 			<div class="pra">
-				<p>UNKNOWN DATA</p>
+				<p>Genius people, like a scientist. The people was blessed by the God of Knowledge, Apollo Venitas. Their technologies investmen and inovation are beyond normal people expect.</p>
 
 				<p style="text-align: center;">
 					<a class="button" href="#">Bariten Prologue</a>
@@ -131,7 +157,7 @@
 			<img src="region/Bazeimer.jpg">
 			<h5>Bazeimer</h5>
 			<div class="pra">
-				<p>UNKNOWN DATA</p>
+				<p>The Nature Keeper. Their people are living among the forest creatures. They're all not staying in one forest, they often moving from one forest to another.</p>
 
 				<p style="text-align: center;">
 					<a class="button" href="#">Bazeimer Prologue</a>
@@ -143,7 +169,7 @@
 			<img src="region/Celestia.jpg">
 			<h5>Celestia</h5>
 			<div class="pra">
-				<p>UNKNOWN DATA</p>
+				<p>Blessed people of the Death itself. Mortem Aeternam was ruler of the city, but he never showed up, not even once. Mortem only showed up when he need to took a soul of died person. They believe Mortem would took them to a brighter place than La Terra.</p>
 
 				<p style="text-align: center;">
 					<a class="button" href="#">Celestia Prologue</a>
@@ -155,7 +181,7 @@
 			<img src="region/ChurchofImperrius.jpg">
 			<h5>Church of Imperrius</h5>
 			<div class="pra">
-				<p>UNKNOWN DATA</p>
+				<p>People who praised Imperrius and the cause of mass Destruction of the world itself. Imperrius leads them to many war and annihilation toward every nations. Even if they lose, they keep swarming around. They live in the shadows of the night. No one knows when they would appear until one of them declaring a war with Vernalla, War Trumpet.</p>
 
 				<p style="text-align: center;">
 					<a class="button" href="#">Church of Imperrius Prologue</a>
@@ -167,7 +193,7 @@
 			<img src="region/Decaphrio.jpg">
 			<h5>Decaphrio</h5>
 			<div class="pra">
-				<p>UNKNOWN DATA</p>
+				<p>Nation of Rangers. Decaphrio Le Andro was founder of the City. He also provides his people with long range weapon, to be a great city with greatest ranger power. Marksman, Archer, Sniper, Crossbow, Decaphrio was the best for providing these items.</p>
 
 				<p style="text-align: center;">
 					<a class="button" href="#">Decaphrio Prologue</a>
@@ -179,7 +205,7 @@
 			<img src="region/Dreamseeker.jpg">
 			<h5>Dreamseeker</h5>
 			<div class="pra">
-				<p>UNKNOWN DATA</p>
+				<p>Blessed by Rumia Fortuna Sevryl, Goddess of Fortune. The people believe they are lucky enough to get everything by their imagination. Some outsiders might think this was stupis. But every person in the universe has different lucky, and among of them, Dreamseeker was blessed by the Fortune itself.</p>
 
 				<p style="text-align: center;">
 					<a class="button" href="#">Dreamseeker Prologue</a>
@@ -191,7 +217,7 @@
 			<img src="region/Fraudelis.jpg">
 			<h5>Fraudelis</h5>
 			<div class="pra">
-				<p>UNKNOWN DATA</p>
+				<p>City of the great healer, Fraudelis was city full of joy and smile. They build many church and pray everyday to gave their gratitude toward The Creator.</p>
 
 				<p style="text-align: center;">
 					<a class="button" href="#">Fraudelis Prologue</a>
@@ -203,7 +229,7 @@
 			<img src="region/Fredevia.jpg">
 			<h5>Fredevia</h5>
 			<div class="pra">
-				<p>UNKNOWN DATA</p>
+				<p>Big City of industries, place of good production at everything, the highest human capital in the world. From wealth to welfare, the people was granted by nature's greatness.</p>
 
 				<p style="text-align: center;">
 					<a class="button" href="#">Fredevia Prologue</a>
@@ -215,7 +241,7 @@
 			<img src="region/Hienz.jpg">
 			<h5>Hienz</h5>
 			<div class="pra">
-				<p>UNKNOWN DATA</p>
+				<p>Olympus, the founder of Hienz. The legends said his shield cannot be broken by anything, even the by the god's power. His statue was tall and people of Hienz also good at providing shield and protection. Their people blessed by Reus Ignis.</p>
 
 				<p style="text-align: center;">
 					<a class="button" href="#">Hienz Prologue</a>
@@ -227,7 +253,7 @@
 			<img src="region/Lephia.jpg">
 			<h5>Lephia</h5>
 			<div class="pra">
-				<p>UNKNOWN DATA</p>
+				<p>This place was not that big, cannot even siad a village because how small their community was. This community believes in no god. They didn't believe if there was god on their side and do not have any religions.</p>
 
 				<p style="text-align: center;">
 					<a class="button" href="#">Lephia Prologue</a>
@@ -239,7 +265,7 @@
 			<img src="region/Mauderia.jpg">
 			<h5>Mauderia</h5>
 			<div class="pra">
-				<p>UNKNOWN DATA</p>
+				<p>People who live Underwater, same as Arcturus. But this one is hostile toward humans and also have a bad relationship with Arcturus. They always declare a war since the city was found until now... Because this city is blessed by Profundis.</p>
 
 				<p style="text-align: center;">
 					<a class="button" href="#">Mauderia Prologue</a>
@@ -251,7 +277,7 @@
 			<img src="region/Ordos.jpg">
 			<h5>Ordos</h5>
 			<div class="pra">
-				<p>UNKNOWN DATA</p>
+				<p>City of Robots and Magic Dolls. They are good at machinery and technology. They cannot beat Ateriel, but they still stand because their anchestor had a promise with Apollo Venitas, that their people will surpass him one day.</p>
 
 				<p style="text-align: center;">
 					<a class="button" href="#">Ordos Prologue</a>
@@ -263,7 +289,7 @@
 			<img src="region/Selenity.jpg">
 			<h5>Selenity</h5>
 			<div class="pra">
-				<p>UNKNOWN DATA</p>
+				<p>Soul Legacy, the town of the greatest creature. This place can be entered only by holy spirits and was hidden in the middle of La Terra. 17 Klyviora's are gathering inside here when they have a meeting. Only people who granted access that can come inside.</p>
 
 				<p style="text-align: center;">
 					<a class="button" href="#">Selenity Prologue</a>
@@ -275,7 +301,7 @@
 			<img src="region/Solaris.jpg">
 			<h5>Solaris</h5>
 			<div class="pra">
-				<p>UNKNOWN DATA</p>
+				<p>Solaris is a village community, they live in Jamaies, because that place can provide warm water pretty quick. Well, because they praised and worshiping the sun, their place was pretty hot, but they feel grateful because of this. At the night time, the village can be really quiet, because they believe danger and evil are lurking at night.</p>
 
 				<p style="text-align: center;">
 					<a class="button" href="#">Solaris Prologue</a>
@@ -287,7 +313,7 @@
 			<img src="region/Sombra.jpg">
 			<h5>Sombra</h5>
 			<div class="pra">
-				<p>UNKNOWN DATA</p>
+				<p>City of the hybrid. Born as a furry or human hybrid, they live peacfully among each others. Even if they have many different race and species. They were born as people of the city.</p>
 
 				<p style="text-align: center;">
 					<a class="button" href="#">Sombra Prologue</a>
@@ -299,7 +325,7 @@
 			<img src="region/Sorrus.jpg">
 			<h5>Sorrus</h5>
 			<div class="pra">
-				<p>UNKNOWN DATA</p>
+				<p>A Mysterious People who come just to tell everyone that "The End is near, and we need to kill you all to prevent that." They're often being post as Bounty, but those bounty hunters never came back after they took the mission to capture "The Sorrus".</p>
 
 				<p style="text-align: center;">
 					<a class="button" href="#">Sorrus Prologue</a>
@@ -311,7 +337,7 @@
 			<img src="region/Thanatos.jpg">
 			<h5>Thanatos</h5>
 			<div class="pra">
-				<p>UNKNOWN DATA</p>
+				<p>Land of the Dragon. The mighty creature with massive body, they can transform themselves into humanoid, somehow they were hostile toward humans. Some of them might be humble but it's really hard to earn their trust.</p>
 
 				<p style="text-align: center;">
 					<a class="button" href="#">Thanatos Prologue</a>
@@ -323,7 +349,7 @@
 			<img src="region/Vladz.jpg">
 			<h5>Vladz</h5>
 			<div class="pra">
-				<p>UNKNOWN DATA</p>
+				<p>A city that builded underground. La Terra has an underground city, they live under the ground because they believe it was the safest place. A Sanctuary for Vivian Lethia, to pray for her people so they can be always safe under her protection.</p>
 
 				<p style="text-align: center;">
 					<a class="button" href="#">Vladz Prologue</a>
@@ -335,7 +361,7 @@
 			<img src="region/WallofIcarus.jpg">
 			<h5>Wall of Icarus</h5>
 			<div class="pra">
-				<p>UNKNOWN DATA</p>
+				<p>Icarus Sveragon. The first Ruler of Outama, who died in the first war because defending his people when he get rampaged by Imperrius's people. He sacrificed himself to keep his people safe. And now, his people building the safest and tallest wall around the city and using his name as it.</p>
 
 				<p style="text-align: center;">
 					<a class="button" href="#">Wall of Icarus Prologue</a>
@@ -347,7 +373,7 @@
 			<img src="region/Xeniel.jpg">
 			<h5>Xeniel</h5>
 			<div class="pra">
-				<p>UNKNOWN DATA</p>
+				<p>A place of justice, where every bad people who get caught and arrested. The great prison in the middle of the sea, People of Xeniel never let any prisoners go that easily. Even thought they never threaten or torture the prisoners. They only imprisoned them to make them regret for what they did.</p>
 
 				<p style="text-align: center;">
 					<a class="button" href="#">Xeniel Prologue</a>
@@ -359,7 +385,7 @@
 			<img src="region/Zephyrum.jpg">
 			<h5>Zephyrum</h5>
 			<div class="pra">
-				<p>UNKNOWN DATA</p>
+				<p>A place of a great magicians. They was Elves, people with the greatest mana, and magic dust. They can live for 1000 years old or more because of their massive ability controlling the time and space.</p>
 
 				<p style="text-align: center;">
 					<a class="button" href="#">Zephyrum Prologue</a>
@@ -370,6 +396,20 @@
 			<button class="arrow right" onclick="scrollCarousel(1)">&gt;</button>
 		</div>
 	</div>
+</div>
+</div>
+
+<footer>
+	<p>Muhammad Sajid</p>
+	<p>More further information about the creator, please visit my social media bellow:</p>
+	<div class="social">
+		<a href="#"><i class="fa-brands fa-facebook"></i></a>
+		<a href="#"><i class="fa-brands fa-instagram"></i></a>
+		<a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+	</div>
+	<p class="end">Copyright By Muhammad Sajid</p>
+</footer>
+
 <script src="script.js"></script>
 	<script>
 	let currentScrollPosition = 0;
@@ -404,6 +444,31 @@ function scrollCarousel(direction) {
     
     carousel.style.transform = `translateX(-${currentScrollPosition}px)`;
 }
+
+    const audioBtn = document.getElementById('audioControl');
+    const bgMusic = document.getElementById('bgMusic');
+    let isPlaying = false;
+
+    // Auto-play setup (many browsers block this by default)
+    document.addEventListener('click', function() {
+        if (!isPlaying) {
+            bgMusic.play();
+            isPlaying = true;
+            audioBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+        }
+    }, { once: true });
+
+    audioBtn.addEventListener('click', function() {
+        if (isPlaying) {
+            bgMusic.pause();
+            audioBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
+        } else {
+            bgMusic.play();
+            audioBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+        }
+        isPlaying = !isPlaying;
+    });
+
 </script>
 </body>
 </html>

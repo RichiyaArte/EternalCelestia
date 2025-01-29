@@ -1,12 +1,19 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const canvas = document.getElementById("starry-night");
+// Function to create and manage a starry night canvas
+function createStarryNight(canvasId) {
+    const canvas = document.getElementById(canvasId);
     const ctx = canvas.getContext("2d");
-
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
     const stars = [];
     const shootingStars = [];
+
+    function resizeCanvas() {
+        const container = canvas.parentElement;
+        canvas.width = container.offsetWidth;
+        canvas.height = container.offsetHeight;
+    }
+
+    // Initial resize and event listener
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
 
     function createBackgroundStars() {
         for (let i = 0; i < 200; i++) {
@@ -50,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
             );
             gradient.addColorStop(0, `rgba(255, 215, 0, ${star.opacity})`);
             gradient.addColorStop(1, `rgba(255, 215, 0, 0)`);
-
+            
             ctx.beginPath();
             ctx.moveTo(star.x, star.y);
             ctx.lineTo(star.x - star.length, star.y - star.length);
@@ -58,16 +65,16 @@ document.addEventListener("DOMContentLoaded", () => {
             ctx.lineWidth = star.width;
             ctx.lineCap = 'round';
             ctx.stroke();
-
+            
             ctx.beginPath();
             ctx.arc(star.x, star.y, star.width, 0, Math.PI * 2);
             ctx.fillStyle = `rgba(255, 215, 0, ${star.opacity})`;
             ctx.fill();
-
+            
             star.x += star.speedX;
             star.y += star.speedY;
             star.opacity -= 0.02;
-
+            
             if (star.opacity <= 0 || 
                 star.x < 0 || star.x > canvas.width || 
                 star.y < 0 || star.y > canvas.height) {
@@ -78,7 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function animate() {
-        ctx.fillStyle = 'black';
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.97)'; // Slightly transparent black for better blending
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         
         drawBackgroundStars();
@@ -87,7 +94,15 @@ document.addEventListener("DOMContentLoaded", () => {
         requestAnimationFrame(animate);
     }
 
+    // Initialize the canvas
     createBackgroundStars();
     setInterval(createShootingStar, 1000);
     animate();
+}
+
+// Initialize all canvases when the document is loaded
+document.addEventListener("DOMContentLoaded", () => {
+    createStarryNight('hero-starry-night');
+    createStarryNight('about-starry-night');
+    createStarryNight('prologues-starry-night');
 });
