@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eternal Celestia – Prologue</title>
+    <style>
+        body {
+            background: #000;
+            color: #fff;
+            font-family: 'Times New Roman', serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+            transition: background 1s ease;
+        }
+        
+        .container {
+            max-width: 800px;
+            text-align: center;
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transition: opacity 2s ease-in;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+        }
+        
+        .fade-out {
+            opacity: 0;
+            transition: opacity 1s ease-out;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        button {
+            background: transparent;
+            border: 1px solid #fff;
+            color: #fff;
+            padding: 10px 30px;
+            font-size: 18px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        button:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .typewriter {
+            min-height: 100px;
+            text-align: left;
+        }
+        
+        .key-section {
+            text-align: left;
+            margin-top: 20px;
+        }
+        
+        .key-group {
+            margin-bottom: 20px;
+        }
+        
+        .key-list {
+            margin-left: 20px;
+        }
+        
+        .emphasized {
+            font-weight: bold;
+            color: #add8e6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Title Screen -->
+        <div id="titleScreen" class="fade-in visible">
+            <h1>Eternal Celestia – Prologue</h1>
+            <button id="startButton">Start</button>
+        </div>
+
+        <!-- Story Container -->
+        <div id="storyContainer" class="hidden">
+            <div id="content" class="typewriter"></div>
+            <button id="nextButton" class="hidden">Next</button>
+        </div>
+    </div>
+
+    <script>
+        const story = [
+            "Long ago, before the first civilization was born, there was only emptiness amidst the sea of stars. The Creator, the sovereign of all that exists and does not, gazed upon His vast yet silent creation. To fill this void, He cast the light of life across the universe, giving birth to countless worlds.",
+            
+            "However, balance is an absolute law that must be maintained. Thus, the Klyviora were born—seventeen keys of the world, entrusted with pioneering and shaping their respective civilizations. They are rulers, guardians, and guides of His people, bound by divine command.",
+            
+            "The Seventeen Keys of the World, Klyviora",
+            
+            "The Klyviora are divided into four groups, each playing a role in maintaining the order of the cosmos:",
+            
+            // Elementalist Keys
+            "The Five Elementalist Keys – Masters of nature's essence, keepers of the world's equilibrium.",
+            "* Sylvannia Dyviana – Goddess of water, calm yet, in her fury, as devastating as the waves.",
+            "* Reus Ignis – God of fire, fearless and bold, his burning passion consumes all doubt.",
+            "* Gale Armamandis – God of wind, the messenger of the Creator, whose whispers reach every corner of the world.",
+            "* Voltera Noctis – God of darkness, a formless thinker, who once spoke, 'Death is not our enemy, and light is not our true ally.'",
+            "* Luciella Riens – Goddess of light, a gentle guide leading her people from darkness to hope.",
+            
+            // Angelion Keys
+            "The Five Angelion Keys – Bearers of light, whisperers of hope and illusion.",
+            "* Vivian Lethia – Giver of life, guiding those newly born and grateful for existence.",
+            "* Chroma Ventus – Master of time, capable of reversing the past and embracing the future, but never without cost.",
+            "* Irelia Rave – Guide of happiness, whose teachings bring smiles… even when none understand why.",
+            "* Alicia De'Gran – Goddess of love, teaching loyalty to the Creator and one another.",
+            "* Rumia Fortuna Sevryl – God of fortune, who bestows blessings upon those daring enough to take risks.",
+            
+            // Demoniac Keys
+            "The Five Demoniac Keys – Shadows of balance, revealers of harsh truths.",
+            "* Mortem Aeternam – Guide of death, arriving without warning, leaving without trace, always welcomed by souls.",
+            "* Fatum Nemythra – Ruler of fate, whispering: 'Fate cannot be altered, yet time always tries.'",
+            "* Imperrius Primordia – The destroyer, leader of those who worship ruin as devotion.",
+            "* Profundis – Guide of hatred, who whispers that hatred is not a sin but a means of survival.",
+            "* Apollo Venitas – God of knowledge, who believes ignorance is more dangerous than misfortune.",
+            
+            // Savior Keys
+            "The Two Savior Keys – Judges of the world, rectifiers of the path taken by mortals.",
+            "* Evaria Phantasma – Sovereign of the world, enforcer of order among civilizations.",
+            "* Richi Artemovia Hikaru – Judgementor of Souls, the divine vision who hold every soul to their place.",
+            
+            // Final message
+            `"I see you've read too far… Quite impressive for a being like you. However, I must stop you before you delve too deeply into our history.
+            Know your place, lowly creature."`,
+            "---Archive Connection Terminated---"
+        ];
+
+        let currentPart = 0;
+        const typewriterSpeed = 30; // milliseconds per character
+
+        // Show title with fade-in
+        document.getElementById('titleScreen').classList.add('visible');
+
+        // Fade in start button after title
+        setTimeout(() => {
+            document.getElementById('startButton').style.opacity = '1';
+        }, 2000);
+
+        function typeWriter(text, element, callback) {
+            let index = 0;
+            element.innerHTML = '';
+            
+            function type() {
+                if (index < text.length) {
+                    element.innerHTML += text.charAt(index);
+                    index++;
+                    setTimeout(type, typewriterSpeed);
+                } else {
+                    if (callback) callback();
+                }
+            }
+            
+            type();
+        }
+
+        function stripHtmlTags(text) {
+    // Create a temporary div element
+    const temp = document.createElement('div');
+    // Set the HTML content
+    temp.innerHTML = text;
+    // Return just the text content
+    return temp.textContent || temp.innerText;
+}
+
+function typeWriter(text, element, callback) {
+    let index = 0;
+    const cleanText = stripHtmlTags(text);
+    element.innerHTML = '';
+    
+    // Check if this is the final Richi Artemovia text
+    const isRichiText = text.includes("Richi Artemovia Hikaru");
+    
+    function type() {
+        if (index < cleanText.length) {
+            element.innerHTML += cleanText.charAt(index);
+            index++;
+            
+            // If we're typing Richi's text and reached "to their place"
+            if (isRichiText && element.innerHTML.endsWith("who hold")) {
+                setTimeout(() => {
+                    reverseType(element, () => {
+                        // After reverse effect, show the final warning message
+                        typeWriter(story[story.length - 2], element, () => {
+                            // Then show the termination message
+                            setTimeout(() => {
+                                typeWriter(story[story.length - 1], element, callback);
+                            }, 1000);
+                        });
+                    });
+                }, 1000);
+                return;
+            }
+            
+            setTimeout(type, typewriterSpeed);
+        } else {
+            if (callback && !isRichiText) callback();
+        }
+    }
+    
+    type();
+}
+
+function reverseType(element, callback) {
+    let text = element.innerHTML;
+    let index = text.length;
+    
+    function erase() {
+        if (index > 0) {
+            text = text.substring(0, index - 1);
+            element.innerHTML = text;
+            index--;
+            setTimeout(erase, typewriterSpeed / 2); // Faster reverse effect
+        } else {
+            if (callback) callback();
+        }
+    }
+    
+    erase();
+}
+
+function showNextPart() {
+    const content = document.getElementById('content');
+    const nextButton = document.getElementById('nextButton');
+    
+    nextButton.classList.add('hidden');
+    
+    if (currentPart < story.length - 2) { // Adjust to not automatically show last two parts
+        typeWriter(story[currentPart], content, () => {
+            nextButton.classList.remove('hidden');
+        });
+        currentPart++;
+    }
+}
+
+        // Event Listeners
+        document.getElementById('startButton').addEventListener('click', () => {
+            const titleScreen = document.getElementById('titleScreen');
+            const storyContainer = document.getElementById('storyContainer');
+            
+            titleScreen.classList.add('fade-out');
+            setTimeout(() => {
+                titleScreen.classList.add('hidden');
+                storyContainer.classList.remove('hidden');
+                showNextPart();
+            }, 1000);
+        });
+
+        document.getElementById('nextButton').addEventListener('click', showNextPart);
+    </script>
+</body>
+</html>
