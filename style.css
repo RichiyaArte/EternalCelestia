@@ -143,7 +143,7 @@ button:hover{
     text-align: center;
 }
 
-.carousel-container {
+.carousel-container-title {
 	position: relative;
 	width: 100%;
 	overflow: hidden;
@@ -219,6 +219,15 @@ h5 {
     margin: 15px 0;
 }
 
+.pra a{
+    text-decoration: none;
+    color: white;
+}
+
+.pra a:hover{
+    color: black;
+}
+
 .card .button {
     background-color: gold;
     color: black;
@@ -237,12 +246,45 @@ h5 {
     cursor: pointer;
 }
 
+.carousel-container-hero {
+    position: relative;
+    width: 100%;
+    max-width: 1000px;
+    margin: 20px auto;
+    overflow: hidden;
+    height: 380px; /* Match card height */
+}
+
+.carousel-slide {
+    position: absolute; /* Keep this absolute */
+    top: 0; /* Add this to fix the position */
+    left: 0; /* Add this to fix the position */
+    width: 100%;
+    height: 100%;
+    transition: transform 1s ease-in-out, opacity 1s ease-in-out;
+    transform: translateX(100%);
+    opacity: 0;
+    display: flex; /* Added to ensure card is visible */
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel-slide.active {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.carousel-slide.previous {
+    transform: translateX(-100%);
+    opacity: 0;
+}
+
 .card-horizontal {
     position: relative;
     width: 100%;
     max-width: 1000px;
     margin: 20px auto;
-    height: 300px;
+    height: 380px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -263,7 +305,6 @@ h5 {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('prologue.png');
     background-size: cover;
     background-position: center;
     opacity: 0.5;
@@ -412,7 +453,7 @@ footer p:nth-child(2){
 
 .end{
     position: absolute;
-    color: grey;
+    color: black;
     bottom: 35px;
     font-size: 14px;
 }

@@ -5,6 +5,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Eternal Celestia</title>
 
+	<link rel="icon" href="icon.png" type="image/png">
+
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<script src="https://kit.fontawesome.com/96eb42d527.js" crossorigin="anonymous"></script>
 
@@ -28,16 +30,94 @@
             <div class="content">
                 <h4>Welcome to the Shining Utopia</h4>
                 <h1>Eternal Celestia</h1>
-                <h3>Let <span>your</span> journey begin.</h3>
-                <div class="card-horizontal">
-                    <div class="card-background"></div>
-                    <div class="card-content">
-                        <h5>The First Chapter</h5>
-                        <div class="pra">
-                            <p><span>Origin of the 17 Keys</span></p>
-                            <button class="button">Prologue - 17 Keys of the World, Birth of the Klyviora's</button>
+                <h3>Let's <span>begin</span> searching for our <span>key.</span></h3>
+
+                 <div class="carousel-container-hero">
+                    <!-- First Slide -->
+                    <div class="carousel-slide active">
+                        <div class="card-horizontal">
+                            <div class="card-background" style="background-image: url('cover/prologue.png')"></div>
+                            <div class="card-content">
+                                <h5>Prologue</h5>
+                                <div class="pra">
+                                    <p><span>Origin of the 17 Keys</span></p>
+                                    <button class="button"><a href="prologue/prologues.html">17 Keys of the World, Birth of the Klyviora's</a></button>
+                                </div>
+                            </div>
                         </div>
                     </div>
+
+                    <!-- Second Slide -->
+                    <div class="carousel-slide">
+                        <div class="card-horizontal">
+                            <div class="card-background" style="background-image: url('cover/chapter1.jpg')"></div>
+                            <div class="card-content">
+                                <h5>The First Chapter</h5>
+                                <div class="pra">
+                                    <p><span>The end is near - Find your key, my dear child</span></p>
+                                    <button class="button">Pages 1 ~ 21 - Dream of the end, Start of the journey</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Third Slide -->
+                    <div class="carousel-slide">
+                        <div class="card-horizontal">
+                            <div class="card-background" style="background-image: url('cover/chapter2.jpg')"></div>
+                            <div class="card-content">
+                                <h5>The Second Chapter</h5>
+                                <div class="pra">
+                                    <p><span>Thou shall arise, A.C.E last Heir</span></p>
+                                    <button class="button">Pages 22 ~ 27 - Struggle for finding compassion between fear and doubt</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Forth Slide -->
+                    <div class="carousel-slide">
+                        <div class="card-horizontal">
+                            <div class="card-background" style="background-image: url('cover/chapter3.jpg')"></div>
+                            <div class="card-content">
+                                <h5>The Third Chapter</h5>
+                                <div class="pra">
+                                    <p><span>Imperrius, seed of destruction</span></p>
+                                    <button class="button">Pages 28 ~ 40 - Yet the destroyer, get destroyed by their greed</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Fifth Slide -->
+                    <div class="carousel-slide">
+                        <div class="card-horizontal">
+                            <div class="card-background" style="background-image: url('cover/chapter4.jpg')"></div>
+                            <div class="card-content">
+                                <h5>The Fourth Chapter</h5>
+                                <div class="pra">
+                                    <p><span>Theater of true happiess</span></p>
+                                    <button class="button">Pages 41 ~ 53 - Richi...?</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sixth Slide -->
+                    <div class="carousel-slide">
+                        <div class="card-horizontal">
+                            <div class="card-background" style="background-image: url('cover/chapter5.jpg')"></div>
+                            <div class="card-content">
+                                <h5>The Fifth Chapter</h5>
+                                <div class="pra">
+                                    <p><span>Corrupted divine</span></p>
+                                    <button class="button">Pages 54 ~ 70 - I am also you, my dear origin. Deep down the abyss</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
                 </div>
             </div>
         </div>
@@ -78,7 +158,7 @@
 		<h1>Prologues</h1>
 	</div>
 
-		<div class="carousel-container">
+		<div class="carousel-container-title">
 		<button class="arrow left" onclick="scrollCarousel(-1)">&lt;</button>
 		<div class="carousel">
 		<div class="card">
@@ -403,13 +483,14 @@
 	<p>Muhammad Sajid</p>
 	<p>More further information about the creator, please visit my social media bellow:</p>
 	<div class="social">
-		<a href="#"><i class="fa-brands fa-facebook"></i></a>
-		<a href="#"><i class="fa-brands fa-instagram"></i></a>
-		<a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+		<a href="https://www.facebook.com/share/162Y3Bt6XR/"><i class="fa-brands fa-facebook"></i></a>
+		<a href="https://www.instagram.com/m_sajid12?igsh=MW9yb3Z5Nm82dXhwNw=="><i class="fa-brands fa-instagram"></i></a>
+		<a href="https://x.com/Sajiduar?t=paZd8LI4rvyqi1VouQ3MLw&s=09"><i class="fa-brands fa-x-twitter"></i></a>
 	</div>
 	<p class="end">Copyright By Muhammad Sajid</p>
 </footer>
 
+<script src="carousel.js"></script>
 <script src="script.js"></script>
 	<script>
 	let currentScrollPosition = 0;
