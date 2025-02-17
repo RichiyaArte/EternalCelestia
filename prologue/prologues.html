@@ -23,6 +23,65 @@
         .container {
             max-width: 800px;
             text-align: center;
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .nav-button {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: #fff;
+            padding: 10px 30px;
+            font-size: 18px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            border-radius: 5px;
+            backdrop-filter: blur(5px);
+        }
+        
+        .nav-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .audio-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.6);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            cursor: pointer;
+            font-size: 24px;
+            padding: 10px;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .audio-btn:hover {
+            background: rgba(0, 0, 0, 0.8);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: scale(1.1);
+        }
+
+        .audio-btn i {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
         .fade-in {
@@ -42,70 +101,122 @@
         .hidden {
             display: none;
         }
-        
-        button {
-            background: transparent;
-            border: 1px solid #fff;
-            color: #fff;
-            padding: 10px 30px;
+
+        .dialogue-box {
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px 0;
+            position: relative;
+            text-align: left;
+            height: 120px; /* Reduced from 150px */
+            width: 700px;
+            cursor: pointer;
+            transition: border-color 0.3s ease;
+        }
+
+        .dialogue-box:hover {
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .character-name {
+            background: rgba(0, 0, 0, 0.9);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 3px;
+            padding: 5px 15px;
+            position: absolute;
+            top: -15px;
+            left: 20px;
             font-size: 18px;
-            cursor: pointer;
-            margin-top: 20px;
-            transition: all 0.3s ease;
-        }
-        
-        button:hover {
-            background: rgba(255, 255, 255, 0.1);
-        }
-        
-        .typewriter {
-            min-height: 100px;
-            text-align: left;
-        }
-        
-        .key-section {
-            text-align: left;
-            margin-top: 20px;
-        }
-        
-        .key-group {
-            margin-bottom: 20px;
-        }
-        
-        .key-list {
-            margin-left: 20px;
-        }
-        
-        .emphasized {
-            font-weight: bold;
-            color: #add8e6;
+            color: #fff;
         }
 
-        .audio-btn {
+        .dialogue-content {
+            margin-top: 10px;
+            font-size: 18px;
+            line-height: 1.8;
+            padding-top: 15px;
+        }
+
+        .continue-indicator {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            animation: bounce 1s infinite;
+            display: none;
+        }
+
+        .continue-indicator.visible {
+            display: block;
+        }
+
+        .continue-indicator img {
+            width: 35px;
+            height: 35px;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .connection-terminated {
             position: fixed;
-            top: 20px;
-            right: 20px;
-            background: none;
-            border: none;
-            color: white;
-            cursor: pointer;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             font-size: 24px;
-            padding: 10px;
+            opacity: 0;
+            transition: opacity 2s ease;
             z-index: 1000;
-            transition: transform 0.3s ease;
-            background-color: rgba(0, 0, 0, 0.5);
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
-        .audio-btn:hover {
-            transform: scale(1.1);
-            background-color: rgba(0, 0, 0, 0.7);
+        .connection-terminated.visible {
+            opacity: 1;
         }
+
+        #storyContainer {
+            position: fixed;
+            bottom: 40px; /* Changed from 100px to move dialogue box higher */
+            left: 50%;
+            transform: translateX(-50%);
+            transition: opacity 1s ease;
+            opacity: 1;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #storyContainer.fade-out {
+            opacity: 0;
+        }
+
+        #returnButtonContainer {
+            position: fixed;
+            top: calc(50% + 55px); /* Move 15px down from center */
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1001;
+            display: none;
+        }
+
+        /* These stay the same but included for completeness */
+        #returnButtonContainer.visible {
+            display: block;
+        }
+
+        .return-button {
+            display: none;
+            margin-top: 20px;
+            z-index: 1001;
+        }
+
+.return-button.visible {
+    display: block;
+}
+
     </style>
 </head>
 <body>
@@ -115,204 +226,424 @@
 
     <audio id="bgMusic" loop>
         <source src="prologuebgm.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
     </audio>
 
     <div class="container">
-        <!-- Title Screen -->
         <div id="titleScreen" class="fade-in visible">
             <h1>Eternal Celestia – Prologue</h1>
-            <button id="startButton">Start</button>
+            <button id="startButton" class="nav-button">Start</button>
         </div>
 
-        <!-- Story Container -->
         <div id="storyContainer" class="hidden">
-            <div id="content" class="typewriter"></div>
-            <button id="nextButton" class="hidden">Next</button>
+            <div id="content"></div>
+        </div>
+
+        <div id="returnButtonContainer">
+            <button id="returnButton" class="nav-button return-button">Back to Main Menu</button>
+        </div>
+
+        <div id="connectionTerminated" class="connection-terminated">
+            ---Archive Connection Terminated---
         </div>
     </div>
 
-    <script>
-        const story = [
-            "Long ago, before the first civilization was born, there was only emptiness amidst the sea of stars. The Creator, the sovereign of all that exists and does not, gazed upon His vast yet silent creation. To fill this void, He cast the light of life across the universe, giving birth to countless worlds.",
-            
-            "However, balance is an absolute law that must be maintained. Thus, the Klyviora were born—seventeen keys of the world, entrusted with pioneering and shaping their respective civilizations. They are rulers, guardians, and guides of His people, bound by divine command.",
-            
-            "The Seventeen Keys of the World, Klyviora",
-            
-            "The Klyviora are divided into four groups, each playing a role in maintaining the order of the cosmos:",
-            
-            "The Five Elementalist Keys – Masters of nature's essence, keepers of the world's equilibrium.",
-            "Sylvannia Dyviana – Goddess of water, calm yet, in her fury, as devastating as the waves.",
-            "Reus Ignis – God of fire, fearless and bold, his burning passion consumes all doubt.",
-            "Gale Armamandis – God of wind, the messenger of the Creator, whose whispers reach every corner of the world.",
-            "Voltera Noctis – God of darkness, a formless thinker, who once spoke, 'Death is not our enemy, and light is not our true ally.'",
-            "Luciella Riens – Goddess of light, a gentle guide leading her people from darkness to hope.",
-            
-            "The Five Angelion Keys – Bearers of light, whisperers of hope and illusion.",
-            "Vivian Lethia – Giver of life, guiding those newly born and grateful for existence.",
-            "Chroma Ventus – Master of time, capable of reversing the past and embracing the future, but never without cost.",
-            "Irelia Rave – Guide of happiness, whose teachings bring smiles… even when none understand why.",
-            "Alicia De'Gran – Goddess of love, teaching loyalty to the Creator and one another.",
-            "Rumia Fortuna Sevryl – God of fortune, who bestows blessings upon those daring enough to take risks.",
-            
-            "The Five Demoniac Keys – Shadows of balance, revealers of harsh truths.",
-            "Mortem Aeternam – Guide of death, arriving without warning, leaving without trace, always welcomed by souls.",
-            "Fatum Nemythra – Ruler of fate, whispering: 'Fate cannot be altered, yet time always tries.'",
-            "Imperrius Primordia – The destroyer, leader of those who worship ruin as devotion.",
-            "Profundis – Guide of hatred, who whispers that hatred is not a sin but a means of survival.",
-            "Apollo Venitas – God of knowledge, who believes ignorance is more dangerous than misfortune.",
-            
-            "The Two Savior Keys – Judges of the world, rectifiers of the path taken by mortals.",
-            "Evaria Phantasma – Sovereign of the world, enforcer of order among civilizations.",
-            "Richi Artemovia Hikaru – Judgementor of Souls, the divine vision who hold every soul to their place.",
-            
-            "\"I see you've read too far… Quite impressive for a being like you. However, I must stop you before you delve too deeply into our history.\nKnow your place, lowly creature.\"",
-            
-            "---Archive Connection Terminated---"
-        ];
-
-        let currentPart = 0;
-        const typewriterSpeed = 30; // milliseconds per character
-
-        // Show title with fade-in
-        document.getElementById('titleScreen').classList.add('visible');
-
-        // Audio control setup
-        const audioBtn = document.getElementById('audioControl');
-        const bgMusic = document.getElementById('bgMusic');
-        let isPlaying = false;
-
-        function stripHtmlTags(text) {
-            const temp = document.createElement('div');
-            temp.innerHTML = text;
-            return temp.textContent || temp.innerText;
+<script>
+    const story = [
+        {
+            type: 'dialogue',
+            speaker: '',
+            text: 'Long ago, before the first civilization was born, there was only emptiness amidst the sea of stars. The Creator, the sovereign of all that exists and does not, gazed upon His vast yet silent creation.'
+        },
+        {
+            type: 'dialogue',
+            speaker: '',
+            text: 'To fill this void, He cast the light of life across the universe, giving birth to countless worlds.'
+        },
+        {
+            type: 'dialogue',
+            speaker: '',
+            text: 'However, balance is an absolute law that must be maintained. Thus, the Klyviora were born—seventeen keys of the world, entrusted with pioneering and shaping their respective civilizations.'
+        },
+        {
+            type: 'dialogue',
+            speaker: '',
+            text: 'The Seventeen Keys of the World, Klyviora. The Klyviora are divided into four groups, each playing a role in maintaining the order of the cosmos.'
+        },
+        {
+            type: 'dialogue',
+            speaker: '',
+            text: 'First, The Five Elementalist Keys – Masters of Nature’s Essence, Keepers of the World’s Equilibrium'
+        },
+        {
+            type: 'dialogue',
+            speaker: '',
+            text: 'Sylvannia Dyviana – Goddess of Water, serene as the moonlit tide, yet, in wrath, as merciless as the maelstrom. She is calm and composed, yet possesses a cheerful warmth that comforts those who seek solace in her presence.'
+        },
+        {
+            type: 'dialogue',
+            speaker: '',
+            text: 'However, beneath her gentle demeanor lies an unyielding force—when enraged, she unleashes the might of the ocean, drowning all who dare challenge her dominion.'
+        },
+        {
+            type: 'dialogue',
+            speaker: '',
+            text: 'Reus Ignis – God of Fire, fearless and bold, his burning passion consumes all doubt. A warrior by nature, Reus is the embodiment of relentless determination and unwavering courage. His heart burns with an intense fervor, always seeking battle and adventure.'
+        },
+        {
+            type: 'dialogue',
+            speaker: '',
+            text: 'Though hot-headed and impatient at times, his wisdom shines through when guiding those who seek strength. He believes that true power comes not just from fire, but from the unshakable will that fuels it.'
+        },
+        {
+            type: 'dialogue',
+            speaker: '',
+            text: 'Gale Armamandis – God of Wind, the messenger of the Creator, whose whispers reach every corner of the world. A wandering sage who carries the knowledge of ages within the ever-shifting currents, Gale is both a guide and an observer.'
+        },
+        {
+            type: 'dialogue',
+            speaker: '',
+            text: 'He is playful and carefree, yet his words hold deep meaning, often spoken in riddles that only the wise can decipher. His laughter echoes like the wind, and those who listen closely may hear the whispers of fate carried upon the breeze.'
+        },
+        {
+            type: 'dialogue',
+            speaker: '',
+            text: 'Voltera Noctis – God of Darkness, a formless thinker, who once spoke, "Death is not our enemy, and light is not our true ally." Mysterious and elusive, Voltera rarely reveals his true thoughts, preferring to linger in the shadows, contemplating the vast unknown.'
+        },
+        {
+            type: 'dialogue',
+            speaker: '',
+            text: 'He does not seek destruction, nor does he revel in chaos—he merely acknowledges the inevitability of the void. His presence is eerie yet oddly comforting, for he alone understands the delicate balance between existence and oblivion.'
+        },
+        {
+            type: 'dialogue',
+            speaker: '',
+            text: 'Luciella Riens – Goddess of Light, a gentle guide leading her people from darkness to hope. She is kind and nurturing, radiating warmth to all who seek her wisdom. Luciella does not impose her light upon others but instead offers it as a beacon, allowing lost souls to find their own way.'
+        },
+        {
+            type: 'dialogue',
+            speaker: '',
+            text: 'Despite her divine purity, she harbors a sorrowful burden—she has witnessed too many who turn away from her guidance, only to be consumed by their own darkness.'
+        },
+        {
+            type: 'dialogue',
+            speaker: '',
+            text: 'Second, The Five Angelion Keys – Bearers of Heaven, Whisperers of Hope and Illusion'
+        },
+        {
+            type: 'dialogue',
+            speaker: '',
+            text: 'Vivian Lethia – Giver of life, guiding those newly born and grateful for existence. She is a motherly figure, compassionate and ever-watchful over those in her care.'
+        },
+        {
+            type: 'dialogue',
+            speaker: '',
+            text: 'Though soft-spoken, her presence alone inspires hope and strength. Her touch can heal wounds, both physical and emotional, and her words are a soothing melody to those in despair.'
+        },
+        {
+            type: 'dialogue',
+            speaker: '',
+            text: 'Chroma Ventus – Master of Time, capable of reversing the past and embracing the future, but never without cost. He is enigmatic, his existence stretched between moments yet to come and those long forgotten.'
+        },
+        {
+            type: 'dialogue',
+            speaker: '',
+            text: 'Chroma speaks in a measured tone, as if each word is carefully weighed against the sands of time. Though he wields the power to alter destiny, he warns that no change is without consequence, and those who dare tamper with fate must be prepared to pay the price.'
+        },
+        {
+            type: 'dialogue',
+            speaker: '',
+            text: 'Irelia Rave – Guide of Happiness, whose teachings bring smiles… even when none understand why. She is whimsical and carefree, always encouraging others to embrace joy in the simplest of things.'
+        },
+        {
+            type: 'dialogue',
+            speaker: '',
+            text: 'Yet, behind her laughter lies a hidden melancholy—she alone knows that happiness is fleeting, and that even the brightest smiles may conceal deep sorrow.'
+        },
+        {
+            type: 'dialogue',
+            speaker: '',
+            text: 'Alicia Allegra – Goddess of Love, teaching loyalty to the Creator and one another. Passionate and devoted, Alicia embodies the purest form of love—be it romantic, familial, or divine. She understands that love can be both a blessing and a curse,'
+        },
+        {
+            type: 'dialogue',
+            speaker: '',
+            text: 'and that the pain of loss is as much a part of love as the joy of companionship. She encourages others to cherish their bonds while they last, for even the strongest love is not eternal.'
+        },
+        {
+            type: 'dialogue',
+            speaker: '',
+            text: 'Rumia Fortuna Sevryl – Goddess of Fortune, who bestows blessings upon those daring enough to take risks. She is a gambler at heart, delighting in the unpredictable twists of fate.'
+        },
+        {
+            type: 'dialogue',
+            speaker: '',
+            text: 'She rewards the bold, but also punishes the arrogant. Many seek her favor, but few truly understand that luck is not granted freely—it is merely the reflection of one’s own choices.'
+        },
+        {
+            type: 'dialogue',
+            speaker: '',
+            text: 'Third, The Five Demoniac Keys – Harbingers of Truth, Lords of Shadows and Reality'
+        },
+        {
+            type: 'dialogue',
+            speaker: '',
+            text: 'Mortem Aeternam – Guide of Death, arriving without warning, leaving without trace, always welcomed by souls. He is neither cruel nor merciful, for death itself is but a passage, not a punishment.'
+        },
+        {
+            type: 'dialogue',
+            speaker: '',
+            text: 'Mortem does not weep for the departed, nor does he rejoice—he simply exists as the final escort for all living beings.'
+        },
+        {
+            type: 'dialogue',
+            speaker: '',
+            text: 'Fatum Nemythra – Ruler of Fate, whispering: "Fate cannot be altered, yet time always tries." Stoic and unyielding, Fatum views all events as predestined.'
+        },
+        {
+            type: 'dialogue',
+            speaker: '',
+            text: 'He does not interfere, nor does he allow others to do so. To him, even the most tragic destinies are necessary, and those who resist their fate are merely delaying the inevitable.'
+        },
+        {
+            type: 'dialogue',
+            speaker: '',
+            text: 'Imperrius Primordia – The Destroyer, leader of those who worship ruin as devotion. He sees destruction not as an end, but as a necessity for rebirth.'
+        },
+        {
+            type: 'dialogue',
+            speaker: '',
+            text: 'His followers are relentless, tearing down civilizations so that new ones may rise from the ashes. To Imperrius, nothing is permanent, and thus, nothing is sacred.'
+        },
+        {
+            type: 'dialogue',
+            speaker: '',
+            text: 'Profundis – Guide of Hatred, who whispers that hatred is not a sin but a means of survival. He feeds on resentment and despair, urging mortals to embrace their darkest emotions.'
+        },
+        {
+            type: 'dialogue',
+            speaker: '',
+            text: 'Though often vilified, Profundis does not lie—he merely reveals the truth that many refuse to acknowledge.'
+        },
+        {
+            type: 'dialogue',
+            speaker: '',
+            text: 'Apollo Venitas – God of Knowledge, who believes ignorance is more dangerous than misfortune. He is cold and calculating, valuing intellect above all else.'
+        },
+        {
+            type: 'dialogue',
+            speaker: '',
+            text: 'He cares little for emotions, for he sees them as obstacles to true understanding. His greatest lesson is that knowledge is both a gift and a burden, and those who seek it must be prepared to bear the weight of truth.'
+        },
+        {
+            type: 'dialogue',
+            speaker: '',
+            text: 'Finally, The Two Savior Keys – Arbiters of Souls, Shepherds of the Mortal Path'
+        },
+        {
+            type: 'dialogue',
+            speaker: '',
+            text: 'Evaria Phantasma – The Warden of Realms, whose decree is law, and whose gaze bendeth empires to order. She is the enforcer of balance, ensuring that no force—light nor darkness—dominates the world unchecked.'
+        },
+        {
+            type: 'dialogue',
+            speaker: '',
+            text: 'Her presence alone commands respect, and her decisions are absolute, for she acts not on personal will, but on divine decree.'
+        },
+        {
+            type: 'dialogue',
+            speaker: '',
+            text: 'Richi Artemovia Hikaru – Judgementor of Souls, he who beholdeth the fates of all, the final arbiter of the living and the dead.'
+        },
+        {
+            type: 'dialogue',
+            speaker: '???',
+            text: "Well, well... So you've wandered too far, prying where you shouldn’t. How typical."
+        },
+        {
+            type: 'dialogue',
+            speaker: '???',
+            text: "Curiosity is a dangerous thing, mortal. It grants knowledge, yes—but some truths are not meant for the likes of you."
+        },
+        {
+            type: 'dialogue',
+            speaker: '???',
+            text: "I can see it... The hesitation in your eyes, that pathetic glimmer of defiance. Did you really think understanding our history would make you our equal? How utterly foolish."
+        },
+        {
+            type: 'dialogue',
+            speaker: '???',
+            text: "You were never meant to see this. You were never meant to know. The weight of this knowledge would crush you, and yet… you keep reaching, like an insect crawling toward a flame."
+        },
+        {
+            type: 'dialogue',
+            speaker: '???',
+            text: "So I will give you one last chance. Leave. Forget what you’ve seen. Turn back while you still can."
+        },
+        {
+            type: 'dialogue',
+            speaker: '???',
+            text: "Because if you take even one step further—there will be no turning back."
+        },
+        {
+            type: 'dialogue',
+            speaker: '???',
+            text: "As the Judgementor of Souls, i won't hesitate to kill you and start to put your soul into the scale of Dead Realms. But since you're alone, i'll give you at least... a little mercy."
+        },
+        {
+            type: 'dialogue',
+            speaker: '???',
+            text: "Leave"
+        },
+        {
+            type: 'dialogue',
+            speaker: '???',
+            text: "This is THE END of your journey."
         }
 
-        function typeWriter(text, element, callback) {
-            let index = 0;
-            const cleanText = stripHtmlTags(text);
-            element.textContent = '';
+    ];
+
+    let currentPart = 0;
+    let isPlaying = false;
+    let isTyping = false;
+    let displayedText = '';
+    const TYPING_SPEED = 20;
+    const REVERSE_TYPING_SPEED = 5;
+
+    const audioBtn = document.getElementById('audioControl');
+    const bgMusic = document.getElementById('bgMusic');
+    const titleScreen = document.getElementById('titleScreen');
+    const storyContainer = document.getElementById('storyContainer');
+    const startButton = document.getElementById('startButton');
+    const returnButton = document.getElementById('returnButton');
+    const returnButtonContainer = document.getElementById('returnButtonContainer');
+    const connectionTerminated = document.getElementById('connectionTerminated');
+
+
+function showTerminationMessage() {
+    storyContainer.classList.add('fade-out');
+    setTimeout(() => {
+        storyContainer.style.display = 'none';
+        connectionTerminated.classList.add('visible');
+        returnButtonContainer.style.display = 'none'; // Explicitly hide first
+        setTimeout(() => {
+            connectionTerminated.classList.remove('visible');
+            returnButtonContainer.style.display = 'block'; // Show container
+            returnButtonContainer.classList.add('visible'); // Add visible class
+            returnButton.classList.add('visible'); // Make button visible
+        }, 4000);
+    }, 1000);
+}
+
+    function typeWriter(content) {
+        if (!content) return;
+        
+        const contentElement = document.getElementById('content');
+        if (content.type === 'dialogue') {
+            const characterNameHTML = content.speaker ? 
+                `<div class="character-name">${content.speaker}</div>` : '';
+            
+            contentElement.innerHTML = `
+                <div class="dialogue-box">
+                    ${characterNameHTML}
+                    <div class="dialogue-content"></div>
+                    <div class="continue-indicator">
+                        <img src="indicator.png" alt="continue">
+                    </div>
+                </div>
+            `;
+            
+            const dialogueContent = contentElement.querySelector('.dialogue-content');
+            const dialogueBox = contentElement.querySelector('.dialogue-box');
+            const continueIndicator = contentElement.querySelector('.continue-indicator');
+            
+            isTyping = true;
+            displayedText = '';
+
+            // Check if this is the special dialogue about Richi Artemovia Hikaru
+            const isSpecialDialogue = content.text.includes("Richi Artemovia Hikaru");
             
             function type() {
-                if (index < cleanText.length) {
-                    element.textContent += cleanText.charAt(index);
-                    index++;
-                    
-                    if (text.includes("Richi Artemovia Hikaru") && element.textContent.endsWith("who hold")) {
-                        setTimeout(() => {
-                            reverseType(element, () => {
-                                typeWriter(story[story.length - 2], element, () => {
-                                    setTimeout(() => {
-                                        typeWriter(story[story.length - 1], element, callback);
-                                    }, 1000);
-                                });
-                            });
-                        }, 1000);
+                if (displayedText.length < content.text.length) {
+                    displayedText += content.text[displayedText.length];
+                    dialogueContent.textContent = displayedText;
+
+                    if (isSpecialDialogue && displayedText.includes("the final arbiter")) {
+                        // Start reverse typing after a brief pause
+                        setTimeout(reverseType, 500);
                         return;
                     }
-                    
-                    setTimeout(type, typewriterSpeed);
+
+                    setTimeout(type, TYPING_SPEED);
+                } else if (!isSpecialDialogue) {
+                    isTyping = false;
+                    continueIndicator.classList.add('visible');
+                }
+            }
+
+            function reverseType() {
+                if (displayedText.length > content.text.indexOf("Richi Artemovia Hikaru")) {
+                    displayedText = displayedText.slice(0, -1);
+                    dialogueContent.textContent = displayedText;
+                    setTimeout(reverseType, REVERSE_TYPING_SPEED);
                 } else {
-                    if (callback && !text.includes("Richi Artemovia Hikaru")) callback();
+                    // Move to next dialogue automatically
+                    currentPart++;
+                    setTimeout(() => {
+                        typeWriter(story[currentPart]);
+                    }, 500);
                 }
             }
             
             type();
-        }
-
-        function reverseType(element, callback) {
-            let text = element.textContent;
-            let index = text.length;
             
-            function erase() {
-                if (index > 0) {
-                    text = text.substring(0, index - 1);
-                    element.textContent = text;
-                    index--;
-                    setTimeout(erase, typewriterSpeed / 2);
-                } else {
-                    if (callback) callback();
-                }
-            }
-            
-            erase();
-        }
-
-        function showNextPart() {
-            const content = document.getElementById('content');
-            const nextButton = document.getElementById('nextButton');
-            
-            nextButton.classList.add('hidden');
-            
-            // Check if we're at the second-to-last message (warning message)
-            if (currentPart === story.length - 2) {
-                typeWriter(story[currentPart], content, () => {
-                    // After warning message, automatically show termination message
-                    setTimeout(() => {
+            // Only add click handler if it's not the special dialogue
+            if (!isSpecialDialogue) {
+                dialogueBox.onclick = function() {
+                    if (isTyping) {
+                        displayedText = content.text;
+                        dialogueContent.textContent = displayedText;
+                        isTyping = false;
+                        continueIndicator.classList.add('visible');
+                    } else {
                         currentPart++;
-                        typeWriter(story[currentPart], content, () => {
-                            // After termination message, show Back to Main Menu button
-                            nextButton.textContent = 'Back to Main Menu';
-                            nextButton.onclick = () => window.location.href = '../index.html';
-                            nextButton.classList.remove('hidden');
-                        });
-                    }, 1000);
-                });
-            }
-            // For all other parts except the last two
-            else if (currentPart < story.length - 2) {
-                typeWriter(story[currentPart], content, () => {
-                    nextButton.classList.remove('hidden');
-                });
-                currentPart++;
+                        if (currentPart === story.length) {
+                            showTerminationMessage();
+                        } else {
+                            typeWriter(story[currentPart]);
+                        }
+                    }
+                };
             }
         }
+    }
 
-        // Event Listeners
-        document.getElementById('startButton').addEventListener('click', () => {
-            const titleScreen = document.getElementById('titleScreen');
-            const storyContainer = document.getElementById('storyContainer');
-            
-            // Try to play background music
+    startButton.addEventListener('click', () => {
+        titleScreen.classList.add('fade-out');
+        setTimeout(() => {
+            titleScreen.classList.add('hidden');
+            storyContainer.classList.remove('hidden');
+            typeWriter(story[0]);
+            currentPart = 0;
+        }, 1000);
+    });
+
+    returnButton.addEventListener('click', () => {
+        window.location.href = '../index.html';
+    });
+
+    audioBtn.addEventListener('click', function() {
+        if (isPlaying) {
+            bgMusic.pause();
+            audioBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
+        } else {
             bgMusic.play().catch(function(error) {
-                console.log("Audio autoplay failed:", error);
+                console.log("Audio play failed:", error);
             });
-            
-            titleScreen.classList.add('fade-out');
-            setTimeout(() => {
-                titleScreen.classList.add('hidden');
-                storyContainer.classList.remove('hidden');
-                showNextPart();
-            }, 1000);
-        });
+            audioBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+        }
+        isPlaying = !isPlaying;
+    });
+</script>
 
-        document.getElementById('nextButton').addEventListener('click', showNextPart);
-
-        // Audio control
-        audioBtn.addEventListener('click', function() {
-            if (isPlaying) {
-                bgMusic.pause();
-                audioBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
-            } else {
-                bgMusic.play().catch(function(error) {
-                    console.log("Audio play failed:", error);
-                });
-                audioBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
-            }
-            isPlaying = !isPlaying;
-        });
-
-        // Try to play audio when user interacts with the page
-        document.addEventListener('click', function() {
-            if (!isPlaying) {
-                bgMusic.play().catch(function(error) {
-                    console.log("Audio play failed:", error);
-                });
-                isPlaying = true;
-                audioBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
-            }
-        }, { once: true });
-    </script>
 </body>
 </html>
