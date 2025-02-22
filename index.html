@@ -66,7 +66,7 @@
                                 <h5>Episode 1</h5>
                                 <div class="pra">
                                     <p><span>The end is near - Find your key, my dear child</span></p>
-                                    <button class="button">Chapter 1 - 15</button>
+                                    <button class="button" onclick="scrollToMainStory()">Chapter 1 - 15</button>
                                 </div>
                             </div>
                         </div>
@@ -80,7 +80,7 @@
                                 <h5>Episode 2</h5>
                                 <div class="pra">
                                     <p><span>Thou shall arise, A.C.E last Heir</span></p>
-                                    <button class="button">Chapter 16 - 25</button>
+                                    <button class="button" onclick="scrollToMainStory()">Chapter 16 - 25</button>
                                 </div>
                             </div>
                         </div>
@@ -94,7 +94,7 @@
                                 <h5>Episode 3</h5>
                                 <div class="pra">
                                     <p><span>Imperrius, seed of destruction</span></p>
-                                    <button class="button">Chapter 25 - 40</button>
+                                    <button class="button" onclick="scrollToMainStory()">Chapter 25 - 40</button>
                                 </div>
                             </div>
                         </div>
@@ -108,7 +108,7 @@
                                 <h5>Episode 4</h5>
                                 <div class="pra">
                                     <p><span>Theater of true happiess</span></p>
-                                    <button class="button">Chapter 41 - 45</button>
+                                    <button class="button" onclick="scrollToMainStory()">Chapter 41 - 45</button>
                                 </div>
                             </div>
                         </div>
@@ -122,7 +122,7 @@
                                 <h5>Episode 5</h5>
                                 <div class="pra">
                                     <p><span>Corrupted divine</span></p>
-                                    <button class="button">Chapter 46 - 50</button>
+                                    <button class="button" onclick="scrollToMainStory()">Chapter 46 - 50</button>
                                 </div>
                             </div>
                         </div>
@@ -739,6 +739,29 @@ function scrollCarousel(direction) {
     // Toggle active class on clicked element
     element.classList.toggle('active');
 }
+
+// First add an ID to the main story section for targeting
+document.querySelector('.chapter-wrapper').id = 'main-story-section';
+
+// Function to handle chapter button clicks
+function scrollToMainStory() {
+    const mainStorySection = document.getElementById('main-story-section');
+    mainStorySection.scrollIntoView({ behavior: 'smooth' });
+    
+    // Auto-expand the Main Story section
+    const mainStoryButton = document.querySelector('.chapter-button');
+    if (!mainStoryButton.classList.contains('active')) {
+        mainStoryButton.click();
+    }
+}
+
+// Add click handlers to all chapter buttons in the carousel
+document.querySelectorAll('.carousel-slide .button').forEach(button => {
+    button.addEventListener('click', (e) => {
+        e.preventDefault(); // Prevent default link behavior
+        scrollToMainStory();
+    });
+});
 </script>
 </body>
 </html>

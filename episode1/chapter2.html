@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eternal Celestia – Chapter 1</title>
+    <link rel="icon" type="image.png" href="../story.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="../sidenav.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://kit.fontawesome.com/96eb42d527.js" crossorigin="anonymous"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            background: #000;
+            color: #fff;
+            font-family: 'Times New Roman', serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+            transition: background 1s ease;
+        }
+        
+        .container {
+            max-width: 800px;
+            text-align: center;
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .nav-button {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: #fff;
+            padding: 10px 30px;
+            font-size: 18px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            border-radius: 5px;
+            backdrop-filter: blur(5px);
+        }
+        
+        .nav-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transition: opacity 2s ease-in;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+        }
+        
+        .fade-out {
+            opacity: 0;
+            transition: opacity 1s ease-out;
+        }
+        
+        .hidden {
+            display: none;
+        }
+
+        .dialogue-box {
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px 0;
+            position: relative;
+            text-align: left;
+            height: 120px; /* Reduced from 150px */
+            width: 700px;
+            cursor: pointer;
+            transition: border-color 0.3s ease;
+        }
+
+        .dialogue-box:hover {
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .character-name {
+            background: rgba(0, 0, 0, 0.9);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 3px;
+            padding: 5px 15px;
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            font-size: 18px;
+            color: #fff;
+        }
+
+        .dialogue-content {
+            margin-top: 10px;
+            font-size: 18px;
+            line-height: 1.8;
+            padding-top: 15px;
+        }
+
+        .continue-indicator {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            animation: bounce 1s infinite;
+            display: none;
+        }
+
+        .continue-indicator.visible {
+            display: block;
+        }
+
+        .continue-indicator img {
+            width: 35px;
+            height: 35px;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .connection-terminated {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            opacity: 0;
+            transition: opacity 2s ease;
+            z-index: 1000;
+        }
+
+        .connection-terminated.visible {
+            opacity: 1;
+        }
+
+        #storyContainer {
+            position: fixed;
+            bottom: 40px; /* Changed from 100px to move dialogue box higher */
+            left: 50%;
+            transform: translateX(-50%);
+            transition: opacity 1s ease;
+            opacity: 1;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #storyContainer.fade-out {
+            opacity: 0;
+        }
+
+        #returnButtonContainer {
+            position: fixed;
+            top: calc(50% + 55px); /* Move 15px down from center */
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1001;
+            display: none;
+        }
+
+        /* These stay the same but included for completeness */
+        #returnButtonContainer.visible {
+            display: block;
+        }
+
+        .return-button {
+            display: none;
+            margin-top: 20px;
+            z-index: 1001;
+        }
+
+.return-button.visible {
+    display: block;
+}
+
+    </style>
+</head>
+<body>
+    <div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <div class="audio-controls">
+      <button id="volumeBtn" class="volume-btn">
+        <i class="fas fa-volume-mute"></i>
+      </button>
+      <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="100">
+    </div>
+    <audio id="bgMusic" loop>
+      <source src="../bgm/Silent Conquest.mp3" type="audio/mpeg">
+    </audio>
+  </div>
+
+  <button class="menu-btn" onclick="openNav()">
+    <i class="fas fa-bars"></i>
+  </button>
+
+    <div class="container">
+        <div id="titleScreen" class="fade-in visible">
+            <h1>Episode 1 - The end is near. Find your key, my dear child.</h1>
+            <h3>Chapter 2 - Big announcement from the Klyviora's.</h3>
+            <button id="startButton" class="nav-button">Start</button>
+        </div>
+
+        <div id="storyContainer" class="hidden">
+            <div id="content"></div>
+        </div>
+
+        <div id="returnButtonContainer">
+            <button id="returnButton" class="nav-button return-button">Back to Main Menu</button>
+        </div>
+
+
+
+        <div id="connectionTerminated" class="connection-terminated">
+            CHAPTER 2 - COMPLETED
+        </div>
+    </div>
+
+<script src="../sidenav.js"></script>
+<script>
+    const story = [
+        {
+            type: 'dialogue',
+            speaker: 'Richi',
+            text: "<i>I'm sure the others are already announcing this to their people too... But i can't keep my head out of it.</i>"
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Richi',
+            text: "<i>...Who... was it? I can't remember them at all.</i>"
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Richi',
+            text: `<i>I keep saying "them" but i don't know who they were... Am i skipping something?</i>`
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Richi',
+            text: `<i>Anyway... Arcarum's people is waiting for my speech. It's not like they will hear it after all.</i>`
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Richi',
+            text: `<i>I can sense doubt in their hearts...</i>`
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Kiryuu',
+            text: "...Why are you just standing there? Come on, they were waiting for you."
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Richi',
+            text: '<i>Heh... Forget it. I have him for now.</i>'
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Richi',
+            text: 'Coming~!'
+        },
+        {
+            type: 'dialogue',
+            speaker: '',
+            text: "In the hall of Arcarum Throne palace... Everyone gathered to hear the words from the Klyviora they praise, The nobles, The civilians, The priests, The Guardians, all of them are inside the castle of Arcarum."
+        },
+        {
+            type: 'dialogue',
+            speaker: '',
+            text: "King Hyuuga and Queen Vasterice also there to hear what Richi want to say about the future of La Terra."
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Emiya Gabrielus',
+            text: `...God of Creation already gave us his blessing by sending The Holy Spirit of Judgementor into Arcarum itself, just like how the propechy said... "Vindecant of Light, Judgementor between heaven and hell, is going to take great value in the war of Archdemons"`
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Richi',
+            text: "..."
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Richi',
+            text: "Um... High priest i think you're a bit too much--"
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Emiya Gabrielus',
+            text: '<i>Turn around</i> Oh, how endearing, the guide of Judgementor itself already appear in the hall of Arcarum. My apologies for being rude because not greeting you by myself...'
+        },
+        {
+            type: 'dialogue',
+            speaker: '',
+            text: "Emiya Gabrielus, the highest priest in Arcarum, and the head of Holy Order of Arcadia, Arcarum's royal church. He is always obedient in worshiping in church, and the most respected person because of his obedience."
+        },
+        {
+            type: 'dialogue',
+            speaker: '',
+            text: "Knowing and learning about the propechy of 17 Klyviora's, Emiya vowed to himself that he will always become the beacon of truth in front of the Judgementor, Richi."
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Richi',
+            text: "Ah-huh? H-High priest you don't have to bow down and kiss my feet! L-Let's just start the ceremony..."
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Emiya Gabrielus',
+            text: '...It is my honor to be under your guidance, dear Holy Spirit of Judgementor.'
+        },
+        {
+            type: 'dialogue',
+            speaker: 'King Hyuuga',
+            text: "So... you say, the propechy of 17 Klyviora's were true?"
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Richi',
+            text: '...Yes, your majesty.'
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Richi',
+            text: "Dear Arcarum people, today... I'll announce that the propechy of 17 Klyvioras has fallen, as my duty... will go more far more than staying in Arcarum."
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Kiryuu',
+            text: '...'
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Kiryuu',
+            text: "<i>Wait, what does he means by that?</i>"
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Richi',
+            text: "The Archdemon will arise in La Terra, and with that, i hope all of guardians and nobles are stay to train more harder and vow to protect Arcarum. Of course it's including for me too."
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Richi',
+            text: 'But somehow, my Key is gone.'
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Richi',
+            text: 'The proof of God descendant has gone somewhere, and i need to find and retrieve the key before going back to Arcarum.'
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Angry Civilians',
+            text: "<i>murmurs</i> It's not like he did something with his power all this time..."
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Worried Civilians',
+            text: 'How if we ended up dying here...?'
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Suspicious civilians',
+            text: "<i>murmurs</i> What did he do even before this? Nothing than bodyguarding the prince, tch, what a hypocreptic speech."
+        },
+        {
+            type: 'dialogue',
+            speaker: '',
+            text: 'People in the hall of Arcarum started to murmurs and spreading words one by one... doubting the Wings of Judgementor announcement.'
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Richi',
+            text: '<i>...I knew it.</i>'
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Richi',
+            text: "With that, all i want to say is... Stay safe and keep praying, God of Creation never let his people fall into misfortune or abandon them."
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Richi',
+            text: "And... Your Majesty, for Arcarum's safety, i think we need to close the gate for... While i was gone on my journey."
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Richi',
+            text: "Just for a while, it's fine. People who need to go out from Arcarum need a proof or lisence that they can protect themselves, I'm afraid if the seed of Archdemons already around us before we knew it."
+        },
+        {
+            type: 'dialogue',
+            speaker: 'King Hyuuga',
+            text: "..."
+        },
+        {
+            type: 'dialogue',
+            speaker: 'King Hyuuga',
+            text: "I'll think of it, dear Holy Spirit of Judgementor."
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Emiya Gabrielus',
+            text: "With that, The Holy Spirit has spoke truth of 17 Klyviora's propechy. We shall keep praying and get united so we can fight that Archdemon forces if they came to Arcarum." 
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Emiya Gabrielus',
+            text: 'All hail to the Holy Spirit of Judgementor!'
+        },
+        {
+            type: 'dialogue',
+            speaker: "Arcarum's People",
+            text: 'ALL HAIL TO THE HOLY SPIRIT OF JUDGEMENTOR!!!'
+        },
+        {
+            type: 'dialogue',
+            speaker: '',
+            text: 'After the speech is done, the people started to leave one by one. Kiryuu approached Richi before he left the hall with the High Priest, it seems like they were talking about something important.'
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Kiryuu',
+            text: "Richi, i need to talk to you--"
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Richi',
+            text: 'Umm... Please wait for a while, because i need to talk with the High Priest too...'
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Kiryuu',
+            text: '...Fine.'
+        },
+        {
+            type: 'dialogue',
+            speaker: '',
+            text: "With that, The high priest and the wings of Judgementor leaves the throne room and walking accross the Garden of Arcadia's Church."
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Emiya Gabrielus',
+            text: "So... you said there's something more than this?"
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Richi',
+            text: "Yes... I mean, i don't fully remember, but i'm sure i wasn't alone in the Altar of Selenity..."
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Richi',
+            text: "All i remember is only something about finding my Key... and about the Archdemons. But i forgot my surroundings."
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Emiya Gabrielus',
+            text: "That means you don't remember the other Klyviora's as well, how about their duty?."
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Richi',
+            text: "The same as the propechy said, but i don't rmemeber their name or who they was..."
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Emiya Gabrielus',
+            text: "Then, that means... you're going to find out where your key was?"
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Richi',
+            text: "Yes, and in that dream also... There's other me."
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Emiya Gabrielus',
+            text: "Your... other self?."
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Richi',
+            text: "Yes... But he's kinda... Darkened? I don't feel any holy energy from him... And he has the Key... But that wasn't the Key i have or seen before."
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Richi',
+            text: "As you can remember, my Key is the symbol of truth, the scale of judgement. But in that dream... he hold the Key with... i don't know, dark diamonds in it?."
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Richi',
+            text: "He really looks like me... and he even told me to not make him regret his choice... And... Oh wait, there's something more."
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Richi',
+            text: "<i>The Key...</i>"
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Richi',
+            text: "When he pushed me to the pit of the abyss, he also throw the Key he holds with me."
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Emiya Gabrielus',
+            text: "So...? Did you have it in your hands now?"
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Richi',
+            text: "No... When i woke up, there's nothing in my hands, and my key also gone. Just like the propechy said."
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Richi',
+            text: "I think there's something more than this, but i can't remember anything at all..."
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Richi',
+            text: "...<i>Sigh</i>"
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Emiya Gabrielus',
+            text: "Don't push yourself too hard dear Holy Spirit of Judgementor, take a rest now."
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Richi',
+            text: "Yeah... I will."
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Kiryuu',
+            text: "..."
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Kiryuu',
+            text: "<i>So he is really going to leave Arcarum...</i>"
+        }
+
+    ];
+
+let currentPart = 0;
+let isTyping = false;
+let displayedText = '';
+const TYPING_SPEED = 20;
+
+const titleScreen = document.getElementById('titleScreen');
+const storyContainer = document.getElementById('storyContainer');
+const startButton = document.getElementById('startButton');
+const returnButton = document.getElementById('returnButton');
+const nextChapterButton = document.createElement('button');
+nextChapterButton.id = 'nextChapterButton';
+nextChapterButton.classList.add('nav-button', 'next-chapter-button');
+nextChapterButton.textContent = 'Move to Chapter 3';
+const returnButtonContainer = document.getElementById('returnButtonContainer');
+const connectionTerminated = document.getElementById('connectionTerminated');
+
+function showTerminationMessage() {
+    storyContainer.classList.add('fade-out');
+    setTimeout(() => {
+        storyContainer.style.display = 'none';
+        connectionTerminated.classList.add('visible');
+        returnButtonContainer.style.display = 'none';
+        setTimeout(() => {
+            connectionTerminated.classList.remove('visible');
+            returnButtonContainer.style.display = 'block';
+            returnButtonContainer.classList.add('visible');
+            returnButton.classList.add('visible');
+            returnButtonContainer.appendChild(nextChapterButton);
+            nextChapterButton.classList.add('visible');
+        }, 4000);
+    }, 1000);
+}
+
+function typeWriter(content) {
+    if (!content) return;
+    
+    const contentElement = document.getElementById('content');
+    if (content.type === 'dialogue') {
+        const characterNameHTML = content.speaker ? `<div class="character-name">${content.speaker}</div>` : '';
+        
+        contentElement.innerHTML = `
+            <div class="dialogue-box">
+                ${characterNameHTML}
+                <div class="dialogue-content"></div>
+                <div class="continue-indicator">
+                    <img src="../indicator.png" alt="continue">
+                </div>
+            </div>
+        `;
+        
+        const dialogueContent = contentElement.querySelector('.dialogue-content');
+        const dialogueBox = contentElement.querySelector('.dialogue-box');
+        const continueIndicator = contentElement.querySelector('.continue-indicator');
+        
+        isTyping = true;
+        displayedText = '';
+        
+        function type() {
+            if (displayedText.length < content.text.length) {
+                displayedText += content.text[displayedText.length];
+                dialogueContent.innerHTML = displayedText;
+                setTimeout(type, TYPING_SPEED);
+            } else {
+                isTyping = false;
+                continueIndicator.classList.add('visible');
+            }
+        }
+        
+        type();
+        
+        dialogueBox.onclick = function() {
+            if (isTyping) {
+                displayedText = content.text;
+                dialogueContent.innerHTML = displayedText;
+                isTyping = false;
+                continueIndicator.classList.add('visible');
+            } else {
+                currentPart++;
+                if (currentPart === story.length) {
+                    showTerminationMessage();
+                } else {
+                    typeWriter(story[currentPart]);
+                }
+            }
+        };
+    }
+}
+
+startButton.addEventListener('click', () => {
+    titleScreen.classList.add('fade-out');
+    setTimeout(() => {
+        titleScreen.classList.add('hidden');
+        storyContainer.classList.remove('hidden');
+        typeWriter(story[0]);
+        currentPart = 0;
+    }, 1000);
+});
+
+returnButton.addEventListener('click', () => {
+    window.location.href = '../index.html';
+});
+
+nextChapterButton.addEventListener('click', () => {
+    window.location.href = 'chapter3.html';
+});
+
+</script>
+
+</body>
+</html>
