@@ -4,7 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eternal Celestia – Prologue</title>
+    <link rel="icon" type="image.png" href="../story.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="../sidenav.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://kit.fontawesome.com/96eb42d527.js" crossorigin="anonymous"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+    
     <style>
         body {
             background: #000;
@@ -47,41 +54,6 @@
             background: rgba(255, 255, 255, 0.2);
             border-color: rgba(255, 255, 255, 0.5);
             transform: translateY(-2px);
-        }
-
-        .audio-btn {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: rgba(0, 0, 0, 0.6);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            color: white;
-            cursor: pointer;
-            font-size: 24px;
-            padding: 10px;
-            z-index: 1000;
-            transition: all 0.3s ease;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            backdrop-filter: blur(5px);
-        }
-
-        .audio-btn:hover {
-            background: rgba(0, 0, 0, 0.8);
-            border-color: rgba(255, 255, 255, 0.5);
-            transform: scale(1.1);
-        }
-
-        .audio-btn i {
-            width: 24px;
-            height: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
         
         .fade-in {
@@ -220,13 +192,22 @@
     </style>
 </head>
 <body>
-    <button id="audioControl" class="audio-btn">
+    <div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <div class="audio-controls">
+      <button id="volumeBtn" class="volume-btn">
         <i class="fas fa-volume-mute"></i>
-    </button>
-
+      </button>
+      <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="100">
+    </div>
     <audio id="bgMusic" loop>
-        <source src="prologuebgm.mp3" type="audio/mpeg">
+      <source src="../bgm/Rain of Lights.mp3" type="audio/mpeg">
     </audio>
+  </div>
+
+  <button class="menu-btn" onclick="openNav()">
+    <i class="fas fa-bars"></i>
+  </button>
 
     <div class="container">
         <div id="titleScreen" class="fade-in visible">
@@ -247,6 +228,7 @@
         </div>
     </div>
 
+<script src="../sidenav.js"></script>
 <script>
     const story = [
         {
@@ -503,14 +485,11 @@
     ];
 
     let currentPart = 0;
-    let isPlaying = false;
     let isTyping = false;
     let displayedText = '';
     const TYPING_SPEED = 20;
     const REVERSE_TYPING_SPEED = 5;
 
-    const audioBtn = document.getElementById('audioControl');
-    const bgMusic = document.getElementById('bgMusic');
     const titleScreen = document.getElementById('titleScreen');
     const storyContainer = document.getElementById('storyContainer');
     const startButton = document.getElementById('startButton');
@@ -547,7 +526,7 @@ function showTerminationMessage() {
                     ${characterNameHTML}
                     <div class="dialogue-content"></div>
                     <div class="continue-indicator">
-                        <img src="indicator.png" alt="continue">
+                        <img src="../indicator.png" alt="continue">
                     </div>
                 </div>
             `;
@@ -629,19 +608,6 @@ function showTerminationMessage() {
 
     returnButton.addEventListener('click', () => {
         window.location.href = '../index.html';
-    });
-
-    audioBtn.addEventListener('click', function() {
-        if (isPlaying) {
-            bgMusic.pause();
-            audioBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
-        } else {
-            bgMusic.play().catch(function(error) {
-                console.log("Audio play failed:", error);
-            });
-            audioBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
-        }
-        isPlaying = !isPlaying;
     });
 </script>
 

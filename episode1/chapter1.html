@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eternal Celestia – Chapter 1</title>
+    <link rel="icon" type="image.png" href="../story.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="../sidenav.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://kit.fontawesome.com/96eb42d527.js" crossorigin="anonymous"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            background: #000;
+            color: #fff;
+            font-family: 'Times New Roman', serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+            transition: background 1s ease;
+        }
+        
+        .container {
+            max-width: 800px;
+            text-align: center;
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .nav-button {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: #fff;
+            padding: 10px 30px;
+            font-size: 18px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            border-radius: 5px;
+            backdrop-filter: blur(5px);
+        }
+        
+        .nav-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transition: opacity 2s ease-in;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+        }
+        
+        .fade-out {
+            opacity: 0;
+            transition: opacity 1s ease-out;
+        }
+        
+        .hidden {
+            display: none;
+        }
+
+        .dialogue-box {
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px 0;
+            position: relative;
+            text-align: left;
+            height: 120px; /* Reduced from 150px */
+            width: 700px;
+            cursor: pointer;
+            transition: border-color 0.3s ease;
+        }
+
+        .dialogue-box:hover {
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .character-name {
+            background: rgba(0, 0, 0, 0.9);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 3px;
+            padding: 5px 15px;
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            font-size: 18px;
+            color: #fff;
+        }
+
+        .dialogue-content {
+            margin-top: 10px;
+            font-size: 18px;
+            line-height: 1.8;
+            padding-top: 15px;
+        }
+
+        .continue-indicator {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            animation: bounce 1s infinite;
+            display: none;
+        }
+
+        .continue-indicator.visible {
+            display: block;
+        }
+
+        .continue-indicator img {
+            width: 35px;
+            height: 35px;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .connection-terminated {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            opacity: 0;
+            transition: opacity 2s ease;
+            z-index: 1000;
+        }
+
+        .connection-terminated.visible {
+            opacity: 1;
+        }
+
+        #storyContainer {
+            position: fixed;
+            bottom: 40px; /* Changed from 100px to move dialogue box higher */
+            left: 50%;
+            transform: translateX(-50%);
+            transition: opacity 1s ease;
+            opacity: 1;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #storyContainer.fade-out {
+            opacity: 0;
+        }
+
+        #returnButtonContainer {
+            position: fixed;
+            top: calc(50% + 55px); /* Move 15px down from center */
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1001;
+            display: none;
+        }
+
+        /* These stay the same but included for completeness */
+        #returnButtonContainer.visible {
+            display: block;
+        }
+
+        .return-button {
+            display: none;
+            margin-top: 20px;
+            z-index: 1001;
+        }
+
+.return-button.visible {
+    display: block;
+}
+
+    </style>
+</head>
+<body>
+    <div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <div class="audio-controls">
+      <button id="volumeBtn" class="volume-btn">
+        <i class="fas fa-volume-mute"></i>
+      </button>
+      <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="100">
+    </div>
+    <audio id="bgMusic" loop>
+      <source src="../bgm/Choose and Contemplate.mp3" type="audio/mpeg">
+    </audio>
+  </div>
+
+  <button class="menu-btn" onclick="openNav()">
+    <i class="fas fa-bars"></i>
+  </button>
+
+    <div class="container">
+        <div id="titleScreen" class="fade-in visible">
+            <h1>Episode 1 - The end is near. Find your key, my dear child.</h1>
+            <h3>Chapter 1 - Dream of the end, Start of the journey.</h3>
+            <button id="startButton" class="nav-button">Start</button>
+        </div>
+
+        <div id="storyContainer" class="hidden">
+            <div id="content"></div>
+        </div>
+
+        <div id="returnButtonContainer">
+            <button id="returnButton" class="nav-button return-button">Back to Main Menu</button>
+            <button id="nextChapterButton" class="nav-button next-chapter-button">Move to Chapter 2</button>
+        </div>
+
+
+
+        <div id="connectionTerminated" class="connection-terminated">
+            CHAPTER 1 - COMPLETED
+        </div>
+    </div>
+
+<script src="../sidenav.js"></script>
+<script>
+    const story = [
+        {
+            type: 'dialogue',
+            speaker: '"Heaven voice"',
+            text: '<i>Wake up.</i>'
+        },
+        {
+            type: 'dialogue',
+            speaker: '"Heaven voice"',
+            text: '<i>The time has come, my dear child.</i>'
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Richi',
+            text: '<i>Who...?</i>'
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Richi',
+            text: '<i>Where am i? Why is there a huge light in front of me--</i>'
+        },
+        {
+            type: 'dialogue',
+            speaker: '',
+            text: 'The beacon of light turned into something... Divine, and that was... The God. God of Creation itself.'
+        },
+        {
+            type: 'dialogue',
+            speaker: 'God of Creation',
+            text: "I gather the 17th keys of my Klyviora's here, to announce that <b>THE END</b> is coming."
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Richi',
+            text: '<i>---?!!</i>'
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Richi',
+            text: '<i>This... This place is altar of Selenity? But how...? I thought i was--</i>'
+        },
+        {
+            type: 'dialogue',
+            speaker: 'God of Creation',
+            text: "La Terra will be approached by Archdemons, nonetheless, i want you all to guide every creature, every followers of the Klyviora's to find their way."
+        },
+        {
+            type: 'dialogue',
+            speaker: 'All of the Klyviora',
+            text: "<i>Looking at Imperrius</i>"
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Imperrius',
+            text: '...What?'
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Imperrius',
+            text: "H-Hey don't look at me like that! I'm not the one at fault here!"
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Profundis',
+            text: "Impossible, and oblivious at the same time, you're the Key of Destruction, aren't you?"
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Imperrius',
+            text: 'I... am.'
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Profundis',
+            text: "But--Hey! You're also the Key of Hatred! Don't make me look like a baddie while you're more evil than me."
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Profundis',
+            text: "<i>chuckling</i> I'm still the best after all, guiding Hatred is something easy, just look at you."
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Imperrius',
+            text: 'Wha---COME HERE YOU INFABULOUS--'
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Mortem',
+            text: 'Stop.'
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Apollo',
+            text: "We're inside the altar of Selenity, a sacred place that only Klyviora's can come"
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Apollo',
+            text: 'Show some respect, will you? Even the god stopped himself because of your stupid issues.'
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Imperrius & Profundis',
+            text: '<i>Sorry...</i>'
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Richi',
+            text: 'What... end if i may ask, my dear god?'
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Richi',
+            text: "I mean... if it's only the Archdemon, we can fight them by ourselves without including our people in La Terra, right?"
+        },
+        {
+            type: 'dialogue',
+            speaker: 'God of Creation',
+            text: "It's true. My brightest Judgementor. But... look at your chest."
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Richi',
+            text: '...?'
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Richi',
+            text: '<i>Eh...? Our key is gone?</i>'
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Evaria',
+            text: 'Our key... they were gone?'
+        },
+        {
+            type: 'dialogue',
+            speaker: 'God of Creation',
+            text: 'Yes. At the same time, after this dream end, i want you all to find your true purposes in La Terra.'
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Ignis',
+            text: "What is our true purpose than guiding and fighting? I'm ready to punch everything in my way!"
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Divy',
+            text: 'Your ambitions knows no bounds. No wonder why Fire people is kinda dumb.'
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Arma',
+            text: 'Pfft...'
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Ignis',
+            text: "Hey! I'm not that dumb!"
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Divy',
+            text: "Fire cannot win againts Water. Yet you always challenged me in the gladiator of Mauderia and ended up dying, Vivian must've be tired of reviving you."
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Ignis',
+            text: 'I--'
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Vivian',
+            text: "Do not worry, dear Holy Fire, I don't mind...."
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Irelia',
+            text: "Our key is the source of the Klyviora's purpose, if it's gone, it included our memory as well"
+        },
+        {
+            type: 'dialogue',
+            speaker: 'God of Creation',
+            text: "Your memories about your people are all safe. But only the memories that bound one of another will gone. In other words, you're all going to lose any memories about other Klyviora's" 
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Richi',
+            text: '...'
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Richi',
+            text: '<i>Our memories... huh</i>.'
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Richi',
+            text: '<i>I wonder if i could fell in love with the sight of Holy Light once again after this...</i>'
+        },
+        {
+            type: 'dialogue',
+            speaker: 'God of Creation',
+            text: "I'll grant the base core of your power, my dear childrens... and after that, vow to yourself to find your key before the Archdemon arise, because if you don't... We don't have enough power to stop them."
+        },
+        {
+            type: 'dialogue',
+            speaker: 'God of Creation',
+            text: 'And La Terra will fall into apocalypse.'
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Noctis',
+            text: 'This is weird...'
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Noctis',
+            text: 'Even the Key of Fate is remain calm there.'
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Noctis',
+            text: "Is there nothing you want to say about this? At all? You never predicted this, didn't you?"
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Nemya',
+            text: "...Nothing. At all."
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Nemya',
+            text: "The Fate of La Terra depends on our guide."
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Nemya',
+            text: "But it has no future to be seek from this onward... My Key is gone."
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Ventus',
+            text: "Right... Heh. Never seen you being this gloomy before, are you scared or--"
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Nemya',
+            text: "..."
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Ventus',
+            text: "...Nevermind."
+        },
+        {
+            type: 'dialogue',
+            speaker: 'God of Creation',
+            text: "Now... I'll let you all leave the altar of Selenity, and wake up from this dream."
+        },
+        {
+            type: 'dialogue',
+            speaker: 'God of Creation',
+            text: "Find the clue of your true purpose, retrieve your key."
+        },
+        {
+            type: 'dialogue',
+            speaker: 'God of Creation',
+            text: "And open your true form again to rise."
+        },
+        {
+            type: 'dialogue',
+            speaker: '',
+            text: "Everyone was casted by the light, leaving the altar one by one."
+        },
+        {
+            type: 'dialogue',
+            speaker: '',
+            text: "But Richi remains there. Even when the God is gone already."
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Richi',
+            text: "<i>...? Am i somehow distorted in this realm of dream?</i>."
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Richi',
+            text: "<i>I can't leave or wake up...</i>."
+        },
+        {
+            type: 'dialogue',
+            speaker: '',
+            text: "Suddenly. A figure... just look like himself, shown in front of him. Fully contrast from his appearance, with dark cloak and fallen angel energy."
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Richi',
+            text: "..."
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Richi',
+            text: "<i>My voice...?! I can't speak at all even if i try, and i can't move--</i>."
+        },
+        {
+            type: 'dialogue',
+            speaker: '',
+            text: "This figure just really look like him, like a twin... He grabbed Richi's chin to look at him directly at his eyes, the eyes of determination, nothing but void inside."
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Richi(?)',
+            text: "Do not repeat the same mistake."
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Richi(?)',
+            text: "Do not make me regret my choice."
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Richi(?)',
+            text: "Do not... fall into the same trap of illusion."
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Richi',
+            text: "<i>What is he talking about?!? I can't--</i>."
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Richi(?)',
+            text: "Wake up. And do what you should do. Remember...."
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Richi(?)',
+            text: "<b>Do not follow the voice.</b>"
+        },
+        {
+            type: 'dialogue',
+            speaker: '',
+            text: "Richi was pushed to the pit of the abyss, and being left falling inside there."
+        },
+        {
+            type: 'dialogue',
+            speaker: '',
+            text: "Woken up in the middle of the night, still using his royal pajamas, Richi gasping and sweating all over, he was trembling from head to toes."
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Richi',
+            text: "W-What was that...?"
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Richi',
+            text: "It's really only a dream... but... it feels real."
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Richi',
+            text: "..."
+        },
+        {
+            type: 'dialogue',
+            speaker: 'Richi',
+            text: "My key is really gone? Then... It was all..."
+        }
+
+    ];
+
+let currentPart = 0;
+let isTyping = false;
+let displayedText = '';
+const TYPING_SPEED = 20;
+
+const titleScreen = document.getElementById('titleScreen');
+const storyContainer = document.getElementById('storyContainer');
+const startButton = document.getElementById('startButton');
+const returnButton = document.getElementById('returnButton');
+const nextChapterButton = document.createElement('button');
+nextChapterButton.id = 'nextChapterButton';
+nextChapterButton.classList.add('nav-button', 'next-chapter-button');
+nextChapterButton.textContent = 'Move to Chapter 2';
+const returnButtonContainer = document.getElementById('returnButtonContainer');
+const connectionTerminated = document.getElementById('connectionTerminated');
+
+function showTerminationMessage() {
+    storyContainer.classList.add('fade-out');
+    setTimeout(() => {
+        storyContainer.style.display = 'none';
+        connectionTerminated.classList.add('visible');
+        returnButtonContainer.style.display = 'none';
+        setTimeout(() => {
+            connectionTerminated.classList.remove('visible');
+            returnButtonContainer.style.display = 'block';
+            returnButtonContainer.classList.add('visible');
+            returnButton.classList.add('visible');
+            returnButtonContainer.appendChild(nextChapterButton);
+            nextChapterButton.classList.add('visible');
+        }, 4000);
+    }, 1000);
+}
+
+function typeWriter(content) {
+    if (!content) return;
+    
+    const contentElement = document.getElementById('content');
+    if (content.type === 'dialogue') {
+        const characterNameHTML = content.speaker ? `<div class="character-name">${content.speaker}</div>` : '';
+        
+        contentElement.innerHTML = `
+            <div class="dialogue-box">
+                ${characterNameHTML}
+                <div class="dialogue-content"></div>
+                <div class="continue-indicator">
+                    <img src="../indicator.png" alt="continue">
+                </div>
+            </div>
+        `;
+        
+        const dialogueContent = contentElement.querySelector('.dialogue-content');
+        const dialogueBox = contentElement.querySelector('.dialogue-box');
+        const continueIndicator = contentElement.querySelector('.continue-indicator');
+        
+        isTyping = true;
+        displayedText = '';
+        
+        function type() {
+            if (displayedText.length < content.text.length) {
+                displayedText += content.text[displayedText.length];
+                dialogueContent.innerHTML = displayedText;
+                setTimeout(type, TYPING_SPEED);
+            } else {
+                isTyping = false;
+                continueIndicator.classList.add('visible');
+            }
+        }
+        
+        type();
+        
+        dialogueBox.onclick = function() {
+            if (isTyping) {
+                displayedText = content.text;
+                dialogueContent.innerHTML = displayedText;
+                isTyping = false;
+                continueIndicator.classList.add('visible');
+            } else {
+                currentPart++;
+                if (currentPart === story.length) {
+                    showTerminationMessage();
+                } else {
+                    typeWriter(story[currentPart]);
+                }
+            }
+        };
+    }
+}
+
+startButton.addEventListener('click', () => {
+    titleScreen.classList.add('fade-out');
+    setTimeout(() => {
+        titleScreen.classList.add('hidden');
+        storyContainer.classList.remove('hidden');
+        typeWriter(story[0]);
+        currentPart = 0;
+    }, 1000);
+});
+
+returnButton.addEventListener('click', () => {
+    window.location.href = '../index.html';
+});
+
+nextChapterButton.addEventListener('click', () => {
+    window.location.href = 'chapter2.html';
+});
+
+</script>
+
+</body>
+</html>

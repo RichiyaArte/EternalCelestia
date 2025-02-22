@@ -7,6 +7,7 @@
 
 	<link rel="icon" href="icon.png" type="image/png">
 
+    <link rel="stylesheet" type="text/css" href="sidenav.css">
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<script src="https://kit.fontawesome.com/96eb42d527.js" crossorigin="anonymous"></script>
 
@@ -15,22 +16,32 @@
 	
 </head>
 <body>
-
-        <button class="audio-btn" id="audioControl">
-            <i class="fas fa-volume-up"></i>
-        </button>
+<div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <div class="audio-controls">
+      <button id="volumeBtn" class="volume-btn">
+        <i class="fas fa-volume-mute"></i>
+      </button>
+      <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="100">
+    </div>
     <audio id="bgMusic" loop>
-        <source src="bgm.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
+      <source src="bgm/Breathing Love.mp3" type="audio/mpeg">
     </audio>
+  </div>
+
+  <button class="menu-btn" onclick="openNav()">
+    <i class="fas fa-bars"></i>
+  </button>
 
 	<div class="canvas-container">
         <canvas id="hero-starry-night" class="starry-night-canvas"></canvas>
         <div class="hero">
             <div class="content">
-                <h4>Welcome to the Shining Utopia</h4>
                 <h1>Eternal Celestia</h1>
-                <h3>Let's <span>begin</span> searching for our <span>key.</span></h3>
+                <h3><span>Truth</span> Shall be Revealed Behind the Locked <span>Memories.</span></h3>
+                <h3>Find Your <span>Key of Fate.</span> Before The <span>End</span> Come to You.</h3>
+                <h4>Highlight Storyboard</h4>
+
 
                  <div class="carousel-container-hero">
                     <!-- First Slide -->
@@ -131,8 +142,8 @@
         <div class="chapter-content">
             <button class="episode-button" onclick="toggleContent(this)">Episode 1 - The end is near - Find your key, my dear child</button>
             <div class="episode-content">
-                <a href="#" class="chapter-link">Chapter 1 - Dream of the end, Start of the journey</a>
-                <a href="#" class="chapter-link">Chapter 2 - Big announcement from the KLyviora's</a>
+                <a href="episode1/chapter1.html" class="chapter-link">Chapter 1 - Dream of the end, Start of the journey</a>
+                <a href="#" class="chapter-link">Chapter 2 - Big announcement from the Klyviora's</a>
                 <a href="#" class="chapter-link">Chapter 3 - Kiryuu Kazeyama, the last Prince</a>
                 <a href="#" class="chapter-link">Chapter 4 - Arcarum coronation</a>
                 <a href="#" class="chapter-link">Chapter 5 - Proof of salvation</a>
@@ -676,6 +687,7 @@
 
 <script src="carousel.js"></script>
 <script src="script.js"></script>
+<script src="sidenav.js"></script>
 	<script>
 	let currentScrollPosition = 0;
 const scrollAmount = 400;
@@ -710,30 +722,6 @@ function scrollCarousel(direction) {
     carousel.style.transform = `translateX(-${currentScrollPosition}px)`;
 }
 
-    const audioBtn = document.getElementById('audioControl');
-    const bgMusic = document.getElementById('bgMusic');
-    let isPlaying = false;
-
-    // Auto-play setup (many browsers block this by default)
-    document.addEventListener('click', function() {
-        if (!isPlaying) {
-            bgMusic.play();
-            isPlaying = true;
-            audioBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
-        }
-    }, { once: true });
-
-    audioBtn.addEventListener('click', function() {
-        if (isPlaying) {
-            bgMusic.pause();
-            audioBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
-        } else {
-            bgMusic.play();
-            audioBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
-        }
-        isPlaying = !isPlaying;
-    });
-
      function toggleContent(element) {
     // Remove active class from siblings at same level
     const siblings = element.parentElement.children;
@@ -751,7 +739,6 @@ function scrollCarousel(direction) {
     // Toggle active class on clicked element
     element.classList.toggle('active');
 }
-
 </script>
 </body>
 </html>

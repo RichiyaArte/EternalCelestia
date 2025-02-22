@@ -4,6 +4,7 @@
 	font-family: 'Josefin Sans', sans-serif;
 	box-sizing: border-box;
 }
+
 .canvas-container {
     position: relative;
     width: 100%;
@@ -47,13 +48,13 @@ h1{
 h3{
 	color: white;
 	font-size: 25px;
-	margin-bottom: 50px;
 }
 
 h4{
 	color: white;
 	letter-spacing: 2px;
 	font-size: 20px;
+    margin-top: 30px;
 }
 
 span{
@@ -555,3 +556,4 @@ footer p:nth-child(2){
     from { opacity: 0; transform: translateY(-10px); }
     to { opacity: 1; transform: translateY(0); }
 }
+
